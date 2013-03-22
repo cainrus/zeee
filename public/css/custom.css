@@ -1,0 +1,57 @@
+@font-face{font-family:'Idolwild Regular';src:url("Idolwild-webfont.eot");src:local('Idolwild Regular'),local('Idolwild'),url("Idolwild.ttf") format('truetype'),url("Idolwild.svg#font") format('svg')}
+h1{font-family:'Idolwild Regular',Helvetica,Arial,sans-serif}
+body{overflow-x:hidden;}
+body #mainContainer{margin-top:40px}
+#app{position:relative}
+#url-add-form{position:relative;}
+#url-add-form #user-input{height:28px;padding-right:40px;}
+#url-add-form #user-input #user-input-inner{height:28px;position:relative;margin-left:4px;margin-right:4px;}
+#url-add-form #user-input #user-input-inner input{width:100%;height:18px;padding-left:4px;padding-right:4px;margin:0;position:absolute;left:-4px}
+#url-add-form #url-add-button{position:absolute;right:21px;top:19px}
+.navbar .nav > li{padding:10px 10px 11px}
+.navbar .nav > li a#logout{padding:0}
+.navbar .nav > li#anonymous{padding:0;}
+.navbar .nav > li#anonymous button{margin-left:5px}
+span.label{font-family:arial}
+.message{height:71px;padding-right:12px;}
+.message hr.message-inner-separator{clear:both;margin-top:10px;margin-bottom:13px;border:0;height:1px;background-image:-webkit-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));background-image:-moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));background-image:-ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));background-image:-o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0))}
+.message .message-title{margin-bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.4}
+.message span.label{float:right;margin-top:3px}
+.short-url .info-inner .link{float:left;font-weight:bold}
+.short-url .info-inner .btn{float:right;margin-right:5px;top:-20px;position:relative}
+.short-url .info-inner .clicks{text-align:right;margin-right:73px}
+#overlay{width:100%;height:100%;background-color:#000;position:fixed;z-index:2000;top:0;left:0;opacity:.7;display:none}
+.chrome-extension .text{float:left}
+.chrome-extension .chrome-ext-icon{background:url("data:;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAIAAAACtmMCAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wHGQQULC1moZsAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACY0lEQVRIx61WTW/TQBB966ydD6choWnciEKbKlSlfPwchJDgwC+AEwfgiBAHhLgjgYSEEOLEjSP/gSJEKTSiTWhDiuQkLnbjGQ5urHjjKErC08qafZ55mp2dXVt8320AaP7+Y9vtruP4vo8JkUgkzEwml5tbKBYASABtu6MxbaxVzEzGMOSJIw8ECcSQff7Y63Udp9446NidbDYrNrd2/jrd6uoKA0Q8FDQeAkLTBIDtH7VUOiOPjhyrVOz5NIVWP28mH4CwSsX6flO6rptOppgJs4KTyZTruprv+wQQ8/AoFk6pJMWR/cHMRKQFBkdROp1nZgChPYocBDGBWTJAHFNBa74QPkMHqxhDKh0hwWBS39UPWpEKEY8i1VoyJBPTwLul5/PxZb9/O5bf+/VgcErEMijB9BscjWVmSQw/mv/OraZyPFZeLACo7d1T5JbPPFRiiSEZrDQjE41Ih8aSjGCvo56Vl1ZgbN/cj9YIAFbPPRomBxQhEfTRELZuNIIFnX9V7q+IAHyr3Q19qsuP1VhmyUTDN9iX67sBt/56KSRjLzqFZCLJHOkeAJ+v/QzWsvHmrNIZAC5UnwyTkb0ODmPU6WT66WotMC69XQ75za93Qs+La0+V2DGKCmL5OMV+yUNceVeJVby8/ixGUe0eSCJM/mkZ3BklZYj3Hz6Wy2X8JzQaDSkEen5PE9rscsEZl1LqnusZhjG7oud5uq7LZDrV7tj5fEFoM6XJRO2OnTGzUtd10zRbrZaZNQ3DEJMvn5k8z+t2urncnNR1ScS6nly00rbdPmwdTv1PsWiVjnvkE/0DKxbjyLjXv9QAAAAASUVORK5CYII=");width:27px;height:27px;margin-left:8px;margin-top:-5px;display:inline-block;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-webkit-transition-duration:.2s;-moz-transition-duration:.2s;-o-transition-duration:.2s;transition-duration:.2s;-webkit-transition-property:-webkit-transform;-moz-transition-property:-moz-transform;-o-transition-property:-o-transform;transition-property:transform;overflow:hidden;}
+.chrome-extension .chrome-ext-icon:hover{-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);-o-transform:rotate(15deg);-ms-transform:rotate(15deg)}
+.brand{font-family:'Idolwild Regular',Helvetica,Arial,sans-serif;}
+.brand span.part1{color:#08c}
+.brand span.part2{color:#fff}
+.brand span.part3{color:#ff1368}
+#mascott2{background-image:url("/img/mascott2.png");background-repeat:no-repeat;display:none;height:100px;width:112px;position:absolute;left:-97px;top:95px;z-index:100;display:block}
+#mascott{background-image:url("/img/mascott.png");background-repeat:no-repeat;display:none;height:142px;width:190px;position:absolute;right:-135px;top:-15px;z-index:100}
+@media (max-width: 650px) {
+  #monster {
+    display: none;
+   }
+}
+
+@media (max-width: 920px) {
+    #mascott2 {
+      display: none;
+    }
+}
+
+@media (min-width: 980px) and (max-width: 1140px) {
+    #mascott2 {
+      display: none;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1360px) {
+    #mascott2 {
+      display: none;
+    }
+}
+.message{-moz-transition:background-color .2s;-webkit-transition:background-color .2s;-o-transition:background-color .2s;transition:background-color .2s;bg-moz-transition:color .2s;-webkit-transition:color .2s;-o-transition:color .2s;transition:color .2s}
+.highlight-message{background-color:#08c;color:#fff}

@@ -1,0 +1,28 @@
+<script id="message-template" type="text/x-handlebars-template">
+<div class="message {{ type }} alert {{{ data.classes }}}">
+    <p class="message-title">
+        <span class="text">{{{ data.title }}}</span>
+        {{#if data.time}}
+            <span class="label time">
+                {{ data.time }}
+            </span>
+        {{/if}}
+    </p>
+    <hr class="message-inner-separator">
+    <div class="info-inner">
+        {{{ data.body }}}
+    </div>
+</div>
+</script>
+<script id="message-short-url-body" type="text/x-handlebars-template">
+<div class="link">
+    {{ short }}
+</div>
+<div class="clicks">
+    clicks
+    <span class="count">{{ count }}</span>
+</div>
+<div class="btn btn-mini btn-primary copy-button">
+    copy
+</div>
+</script>

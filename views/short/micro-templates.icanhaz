@@ -1,0 +1,43 @@
+<!-- App template -->
+<script id="app" type="text/html">
+    <div id="app-short-url">
+        <!-- url input control -->
+        <form id="url-add-form" class="well form-inline form-horizontal">
+            <div id="user-input" class="input-append">
+                <input id="url-input" class="input-small" type="text" placeholder="Type url…"><a id="create" type="submit" class="btn btn-primary" data-loading-text="loading…" >
+                    <i class="icon-plus-sign icon-white">&nbsp;</i>
+                </a>
+            </div>
+        </form>
+        <!-- url list table -->
+        <table id="url-table" class="table table-bordered table-striped table-condensed">
+            <thead style="display:none;">
+                <th class="href-head">HOVER LINK TO SEE SHORTY!</th>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td>Total:<span class="total"></span></td>
+                </tr>
+             </tfoot>
+            <tbody id="url-list"></tbody>
+
+        </table>
+    </div>
+</script>
+<!-- Url record -->
+<script id="url" type="text/html">
+    <tr id="url_{{ cid }}" class="status-{{ status }}">
+        <td class="href">
+            <span class="tools">
+                <!--a href="#url/update/{{ cid }}"><i class="icon status"></i></a>
+                <a href="#url/edit/{{ cid }}"><i class="icon edit icon-pencil"></i></a>
+                <a href="#" class="remove-url-control"><i class="icon remove icon-remove-sign"></i></a-->
+            </span>
+            <span class="url">{{ orig }}</span>
+        </td>
+    </tr>
+</script>
+<!-- Url record tool -->
+<script id="urltool" type="text/html">
+    <a href="{{ action }}"><i class="icon {{ classes }}"></i></a>
+</script>

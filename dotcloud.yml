@@ -1,0 +1,9 @@
+www:
+  type: nodejs
+  config:
+      node_version: v0.8.x
+  ports:
+      www: http
+      socketio: tcp
+data:
+  type: redis
