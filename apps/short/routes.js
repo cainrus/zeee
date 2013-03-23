@@ -2,18 +2,19 @@ module.exports = function(app) {
 
     var
         // inject common client/server functions
-        common = require(process.cwd() + '/public/js/common.js'),
+        common = require(process.cwd() + '/public/js/common.js')
         // redis db instance
-        db     = require(process.cwd() + "/classes/redisConnection.js"),
+       ,db  = require(process.cwd() + "/db/redisConnection.js")
         // environment settings
-        conf   = require(process.cwd() + "/settings/environment.js")
+       ,conf   = require(process.cwd() + "/settings/environment.js")
+        // url counter.
+       ,urlCounter = require(process.cwd() + '/classes/counter.js')('url', db)
     ;
-
-
 
     /**
      * Check, if it's valid subdomain for redirection
-     * @param {String} domain
+     *
+     * @param {String} subdomain
      * @return {Boolean}
      */
     var isRedirectSubdomain = function(subdomain){
