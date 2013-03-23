@@ -33,7 +33,8 @@ var dbDependedInit = require('underscore').once(function() {
     site_vhosts.push(express.vhost('*.' + conf.domain, require('./apps/short/app.js')));
     vhost = express.createServer.apply(this, site_vhosts);
     vhost .listen(conf.port);
-	console.log('express is listening port: '+conf.port);
+	console.log("Listening on " + conf.port);
+
 });
 
 
