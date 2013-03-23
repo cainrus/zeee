@@ -92,6 +92,7 @@ module.exports = function(app) {
                 req.session.urls = req.session.urls.slice(0, 5);
                 if (err) {
                     console.log('rotue /create error: ' + err);
+                    // TODO: fix client reaction (don't react at all now.)
                     res.send(JSON.stringify({error: 'Short url hasn\'t been created.'}))
                 } else {
                     res.send(JSON.stringify({shrt: shrt, orig: orig, status: 'updated'}));
