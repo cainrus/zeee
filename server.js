@@ -28,7 +28,12 @@ var dbDependedInit = require('underscore').once(function() {
 });
 
 db.on('connect', function() {
+    console.log("Redis db is inited.");
     dbDependedInit();
+});
+
+db.one('error', function() {
+    console.log('Redis db error: ' + arguments.slice(0).join(', '));
 });
 
 
