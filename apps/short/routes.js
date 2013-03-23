@@ -78,8 +78,12 @@ module.exports = function(app) {
     // Create new short url API
     app.post('/create', function(req, res) {
 
-        var shrt = urlCounter.generate().toString(16);
+        var count = urlCounter.generate();
+        console.log('/create url count: '+count);
+        var shrt = count.toString(16);
+        console.log('/create url shrt: '+shrt);
         var orig = common.normalizeUrl(req.body.orig);
+        console.log('/create url orig: '+req.body.orig);
         if (orig && common.isValidUrl(orig) && !common.isSameDomain(orig, conf.domain)) {
             db.hmset('url:'+shrt, {url:  orig, count: 0, short: shrt, created: new Date().getTime()}, function(err, value) {
 
