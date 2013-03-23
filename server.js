@@ -32,7 +32,7 @@ db.on('connect', function() {
     dbDependedInit();
 });
 
-db.one('error', function() {
+db.on('error', function() {
     console.log('Redis db error: ' + arguments.slice(0).join(', '));
 });
 
