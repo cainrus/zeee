@@ -2,8 +2,8 @@ var conf = {};
 
 process.env.NODE_ENV = 'production';
 
-var environmentFile = '/home/dotcloud/environment.json';
-var environment = JSON.parse(require('fs').readFileSync(environmentFile));
+//var environmentFile = '/home/dotcloud/environment.json';
+//var environment = JSON.parse(require('fs').readFileSync(environmentFile));
 conf.domain    = 'ze.ee';
 conf.subdomain = 'www';
 conf.port      = process.env.PORT || 3000;
