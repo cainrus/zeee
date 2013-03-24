@@ -13,6 +13,7 @@ vhost = express.createServer.apply(this, [
     express.vhost('cdn.' + conf.domain, require('./apps/assetProvider/app.js')),
     express.vhost('*.' + conf.domain, require('./apps/short/app.js'))
 ]);
+
 vhost.listen(conf.port);
 
 

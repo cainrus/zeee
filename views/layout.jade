@@ -23,6 +23,8 @@ html
 
 
   body
+    - if (!debug)
+      include ../google/analytics/script.html
     #loading
     .container-fluid
       #mainContainer.container

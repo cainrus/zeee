@@ -20,11 +20,14 @@ module.exports = function(app) {
 
 
     app.configure('development', function() {
-        //app.use(express.logger());
+        app.use(express.logger());
         app.use(express.errorHandler({
             dumpExceptions: true,
             showStack: true
         }));
+        app.locals({
+          debug: true
+        });
     });
 
     app.configure('production', function() {
