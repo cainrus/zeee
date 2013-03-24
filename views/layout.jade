@@ -23,7 +23,7 @@ html
 
 
   body
-    - if (!debug)
+    - if (typeof(debug) == 'undefined')
       include ../google/analytics/script.html
     #loading
     .container-fluid
