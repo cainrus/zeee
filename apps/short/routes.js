@@ -9,6 +9,8 @@ module.exports = function(app) {
        ,conf   = require(process.cwd() + "/settings/environment.js")
         // url counter.
        ,urlCounter = require(process.cwd() + '/classes/counter.js')('url', db)
+       ,ga = require(process.cwd() + '/google/analytics/server.ga.js')
+
     ;
 
     /**
@@ -32,13 +34,16 @@ module.exports = function(app) {
             var urlKey = 'url:'+subdomain;
             db.hget(urlKey, 'url', function(err, url) {
                 url = url&&url.toString();
-                
                 if (url) {
                     res.writeHead(302, {
                         'Location': url
                     });
                     res.end();
                     db.HINCRBY('url:'+subdomain, 'count', 1);
+                    ga.trackEvent({
+                        category: 'Jump',
+                        action: url
+                    });
                  } else {
                     next();
                  }
