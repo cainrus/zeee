@@ -1,16 +1,14 @@
-module.exports = function(app) {
+module.exports = function(app, conf) {
+    'use strict';
 
-    var
+    var rootPath = process.cwd(),
         // inject common client/server functions
-        common = require(process.cwd() + '/public/js/common.js')
+        common = require(rootPath + '/public/js/common.js'),
         // redis db instance
-       ,db  = require(process.cwd() + "/db/redisConnection.js")
-        // environment settings
-       ,conf   = require(process.cwd() + "/settings/environment.js")
+        db  = require(rootPath + "/db/redisConnection.js"),
         // url counter.
-       ,urlCounter = require(process.cwd() + '/classes/counter.js')('url', db)
-       ,ga = require(process.cwd() + '/google/analytics/server.ga.js')
-
+        urlCounter = require(rootPath + '/classes/counter.js')('url', db),
+        ga = require(rootPath + '/google/analytics/server.ga.js')
     ;
 
     /**
@@ -20,7 +18,7 @@ module.exports = function(app) {
      * @return {Boolean}
      */
     var isRedirectSubdomain = function(subdomain){
-        return !{'cdn':1, 'www':1, '':1}[subdomain];
+        return !{'www':1, '':1}[subdomain];
     };
 
     /**
@@ -96,9 +94,8 @@ module.exports = function(app) {
                 req.session.urls.unshift(shrt);
                 req.session.urls = req.session.urls.slice(0, 5);
                 if (err) {
-                    console.log('rotue /create error: ' + err);
-                    // TODO: fix client reaction (don't react at all now.)
-                    res.send(JSON.stringify({error: 'Short url hasn\'t been created.'}))
+                    console.log('rotue create error: ' + err);
+                    res.send(JSON.stringify({error: 'Short url hasn\'t been created. Please, try again later.'}))
                 } else {
                     res.send(JSON.stringify({shrt: shrt, orig: orig, status: 'updated'}));
                 }

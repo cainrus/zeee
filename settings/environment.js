@@ -1,16 +1,18 @@
-var conf = {};
+(function () {
+    'use strict';
 
-process.env.NODE_ENV = 'production';
+    var path = require('path');
 
-//var environmentFile = '/home/dotcloud/environment.json';
-//var environment = JSON.parse(require('fs').readFileSync(environmentFile));
-conf.domain    = 'ze.ee';
-conf.subdomain = 'www';
-conf.port      = process.env.PORT || 5000;
-conf.outerPort = 80;
-conf.protocol  = 'http://';
-conf.rootDir   = __dirname.replace(/\/\w+$/, '');
-conf.publicDir = conf.rootDir + '/public';
-require('./environment.all.js')(conf);
-
-module.exports = conf;
+    var conf = {};
+    conf.env = process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+    conf.domain = process.env.NODE_ENV === 'production' ? 'ze.ee' : 'localhost.loc';
+    conf.port = process.env.PORT || 5000;
+    conf.domainWithPort = conf.domain + (conf.port && conf.port !== 80 ? (':' + conf.port) : '');
+    conf.subdomain = 'www';
+    conf.outerPort = 80;
+    conf.protocol = 'http://';
+    conf.rootDir = process.cwd();
+    conf.publicDir = path.join(conf.rootDir, 'public');
+    conf.registeredSubdomain = [];
+    module.exports = conf;
+}());
