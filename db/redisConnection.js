@@ -1,8 +1,7 @@
-// db.js
-(function () {
+module.exports = function (conf) {
     'use strict';
     var client, redis = require('redis');
-    if (process.env.NODE_ENV === 'production') {
+    if (conf.env === 'production') {
         console.log('Redis connect url: ' + process.env.REDISCLOUD_URL);
         var redisURL = require('url').parse(process.env.REDISCLOUD_URL);
         client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
@@ -19,5 +18,5 @@
         client = redis.createClient();
     }
 
-    module.exports = client;
-})();
+    return client;
+};
