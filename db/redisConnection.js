@@ -1,6 +1,6 @@
 // db.js
 var client, redis = require('redis');
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
 	client = redis.createClient();
 } else {
 	var redisURL = require('url').parse(process.env.REDISCLOUD_URL);

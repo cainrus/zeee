@@ -29,6 +29,34 @@ module.exports = function(app, conf) {
 
 
     app.configure('development', function() {
+
+        // Jade: script render strategy.
+        app.helpers({
+            script: function (src) {
+                return scriptTmpl({src: src.replace('#{domain}', conf.domainWithPort)});
+            },
+            scripts: function() {
+                return '';
+            }
+        });
+
+        // Jade: pretty html.
+        app.set('view options', { pretty: true });
+
+        app.use(function(req, res, next) {
+            res.header('app' , 'short' );
+            next();
+
+        });
+
+        app.use(express.logger());
+        app.use(express.errorHandler({
+            dumpExceptions: true,
+            showStack: true
+        }));
+    });
+
+    var productionSetup = function() {
         // Jade: script rendering strategy.
         (function() {
             var scripts = '';
@@ -50,36 +78,9 @@ module.exports = function(app, conf) {
             });
         }());
 
-
-        // Jade: pretty html.
-        app.set('view options', { pretty: true });
-
-        app.use(function(req, res, next) {
-            res.header('app' , 'short' );
-            next();
-
-        });
-
-        app.use(express.logger());
-        app.use(express.errorHandler({
-            dumpExceptions: true,
-            showStack: true
-        }));
-    });
-
-    app.configure('production', function() {
-
-        // Jade: script render strategy.
-        app.helpers({
-            script: function (src) {
-                return scriptTmpl({src: src.replace('#{domain}', conf.domainWithPort)});
-            },
-            scripts: function() {
-                return '';
-            }
-        });
-
         app.use(express.errorHandler());
-    });
+    };
+    app.configure('production', productionSetup);
+    app.configure('test', productionSetup);
 
 };

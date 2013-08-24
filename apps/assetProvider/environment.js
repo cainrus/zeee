@@ -123,8 +123,7 @@ module.exports = function(app, conf) {
         }));
     });
 
-    app.configure('production', function() {
-
+    var productionSetup = function() {
         // Stylus..
         app.use(
             stylus.middleware(
@@ -137,5 +136,8 @@ module.exports = function(app, conf) {
 
         var day = 86400000;
         app.use(express.static(conf.publicDir, { maxAge: day }));
-    });
-}
+    };
+
+    app.configure('production', productionSetup);
+    app.configure('test', productionSetup);
+};

@@ -19,7 +19,7 @@ module.exports = function (app, conf) {
                 var templateSrc = fs.readFileSync(templatePath);
                 var template = jade.compile(templateSrc);
                 var html = template();
-                if (1 || conf.env === 'production') {
+                if ( conf.env === 'production' || conf.env === 'test') {
                     var cacheDir = templatePath.replace(viewsDirPath, conf.publicDir).replace('.jade', '.html');
                     fs.writeFile(cacheDir, html, function(err) {
                         if (err) {
