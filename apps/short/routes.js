@@ -2,10 +2,11 @@ module.exports = function(app, conf) {
     'use strict';
 
     var rootPath = process.cwd(),
+
         // inject common client/server functions
         common = require(rootPath + '/public/js/common.js'),
         // redis db instance
-        db  = require(rootPath + "/db/redisConnection.js"),
+        db  = require(rootPath + "/db/redisConnection.js")(conf),
         // url counter.
         urlCounter = require(rootPath + '/classes/counter.js')('url', db),
         ga = require(rootPath + '/google/analytics/server.ga.js')

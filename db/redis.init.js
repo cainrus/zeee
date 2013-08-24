@@ -1,5 +1,6 @@
 module.exports = function (conf) {
     'use strict';
+
     var client = require('./redisConnection')(conf);
     client.on('connect', function () {
         console.log("Redis db is connected.");
@@ -10,4 +11,4 @@ module.exports = function (conf) {
     });
 
     return client;
-}
+};

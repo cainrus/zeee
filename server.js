@@ -19,7 +19,7 @@ server
 
 console.log('listen: cdn.' + conf.domain + ':' + conf.port);
 console.log('listen: *.' + conf.domain + ':' + conf.port);
-console.log('mode: ' + process.env.NODE_ENV);
+console.log('mode: ' + conf.env);
 server.listen(conf.port);
 
 
