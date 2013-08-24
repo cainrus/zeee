@@ -1,9 +1,10 @@
 var
     express = require('express'),
-    connect = require('connect'),
-    conf = require('./settings/environment.js'),
-    db = require("./db/redis.init.js")(conf)
+    conf = require('./settings/environment.js')
 ;
+
+// Init database.
+require("./db/redis.init.js")(conf);
 
 //var socketio = require('./classes/socket.js')(conf);
 //global.everyauth = require('everyauth');
