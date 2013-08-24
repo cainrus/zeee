@@ -15,6 +15,7 @@
             }
         });
     } else {
+        console.log('redis in dev mode.')
         client = redis.createClient();
     }
 
