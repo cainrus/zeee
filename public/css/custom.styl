@@ -73,6 +73,12 @@ rotatable(time=0.2s) {
   overflow hidden
 }
 
+transitionSetup()
+  -webkit-transition arguments
+  -moz-transition arguments
+  -o-transition arguments
+  transition arguments
+
 doRotate(degr=15deg) {
   -webkit-transform rotate(degr)
   -moz-transform rotate(degr)
@@ -176,12 +182,11 @@ span.label
 
 
 @keyframes shake
-  0%, 90%
-    doTransform: translateX(0)
+  0%, 100%
     doTransform(rotate(0deg))
-  10%, 30%, 50%, 70%
+  10%, 30%, 55%, 85%
     doTransform(rotate(-15deg))
-  20%, 40%, 60%
+  20%, 40%, 70%
     doTransform(rotate(15deg))
 
 
@@ -205,7 +210,6 @@ span.label
   position absolute
   left: -97px;
   top: 95px;
-  z-index: 100;
   display: block;
 
 #mascott
@@ -217,17 +221,48 @@ span.label
   position absolute
   right: -135px;
   top -15px
-  //margin-right 40px
-  z-index: 100;
 
-#mascott, #mascott2 {
+#mascott3
+  cursor pointer
+  position: fixed
+  background-image: url(/img/mascott.png)
+  background-repeat: no-repeat
+  height: 142px;
+  width: 190px
+  right: 61px
+  bottom: -137px
+  animate: mascott3show 1s ease-in 0
+
+  &:not(.hiddenMascott):not(:hover)
+    bottom: -69px
+  rotation(14deg)
+  transitionSetup(bottom 0.4s ease)
+  &:hover
+    bottom: -102px
+    rotation(13deg)
+  &.hiddenMascott
+    bottom: -137px !important
+
+
+
+@keyframes mascott3show
+  from
+    /*bottom: -102px*/
+  to
+    bottom: -69px
+
+
+.mascotts
+  z-index: 100
+
+#mascott, #mascott2
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: -moz-none;
   -ms-user-select: none;
   user-select: none;
-}
+
 
 @css {
   @media (max-width: 650px) {
@@ -308,7 +343,7 @@ span.label
 
 
 
-#mascott2 .rightEye {
+#mascott2 .rightEye
   height: 3px;
   top: 26px;
   left: 64px;
@@ -319,7 +354,7 @@ span.label
   border-bottom: 1px solid #000;
   animate: mascott2REye 8s ease 4s infinite;
 
-}
+
 
 @keyframes mascott2REye
   0%
@@ -343,3 +378,6 @@ span.label
     width: 10px;
     rotation(7deg)
 
+/* hide flash block extension */
+div[style*="gofhjkjmkpinhpoiabjplobcaignabnl"]
+  display: none;

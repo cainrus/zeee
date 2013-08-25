@@ -1713,16 +1713,81 @@ b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){a.apply
             $('.chrome-extension #installChromeExt').on('click', function() {
                 chrome.webstore.install(
                    'https://chrome.google.com/webstore/detail/ecchcfjajmkifnnfibbpclaiigfaanpo',
-                    function(){},
-                    function(){
+                    function() {},
+                    function() {
                         window.open('https://chrome.google.com/webstore/detail/ecchcfjajmkifnnfibbpclaiigfaanpo', '_tab');
                     }
                );
             });
         }
 
+        window.cookieFlags = (function () {
+            var data, dict = ['returnedUser', 'mascott3hidden'];
+            var handler = {
+                get: function (key) {
+                    if (typeof key == 'undefined') {
+                        data = Number($.cookie('flags'));
+                        return (Number(!!data) ? data : 0).toString(2).split('').reverse().join('');
+                    } else {
+                        var num = dict.indexOf(key);
+                        // invalid key
+                        if (num === -1) {
+                            return false;
+                        }
+                        data = handler.get();
+                        // Out of range, setting is not defined yet.
+                        if (num < 0) {
+                            return false;
+                        }
 
+                        return Boolean(parseInt(data[num], 10));
+                    }
+                },
+                set: function (key, val) {
+                    var num = dict.indexOf(key);
+                    // invalid key
+                    if (num === -1) {
+                        throw('cookieFlags: key `' + key + '` is not defined in dict');
+                    }
+                    val = Number(Boolean(val));
+                    data = String(handler.get()).split('');
 
+                    data[num] = val;
+                    data = data.map(function (a) {
+                        return Number(parseInt(a, 10));
+                    });
+                    data = data.reverse().join('');
+                    var orig = data;
+                    data = Number(data);
+                    data = parseInt(data, 2);
+                    $.cookie('flags', data);
+                    console.log('set,', key, orig);
+                    return orig;
+                }
+            };
+
+            return handler;
+        }());
+
+        var isReturnedUser = cookieFlags.get('returnedUser');
+        if (!isReturnedUser) {
+            cookieFlags.set('returnedUser', 1);
+            cookieFlags.set('mascott3hidden', 1);
+        }
+
+        var mascott3 = $('#mascott3');
+        mascott3.click(function(){
+            mascott3.toggleClass('hiddenMascott');
+            var isHidden = mascott3.hasClass('hiddenMascott');
+            console.log(isHidden);
+            cookieFlags.set('mascott3hidden', isHidden ? 1 : 0 );
+
+        });
+        var isMascott3IsHidden = cookieFlags.get('mascott3hidden');
+        if (isMascott3IsHidden) {
+            mascott3.addClass('hiddenMascott');
+        }
+        mascott3.removeAttr('style');
 
 
         var swapPanels = function () {
