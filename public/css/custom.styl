@@ -47,6 +47,20 @@ border-radius()
   -moz-border-radius arguments
   border-radius arguments
 
+animate()
+  -webkit-animation: arguments
+  -moz-animation: arguments
+  -ms-animation: arguments
+  -o-animation: arguments
+  animation: arguments
+
+rotation(degr)
+  -webkit-transform: rotate(degr)
+  -moz-transform: rotate(degr)
+  -ms-transform: rotate(degr)
+  -o-transform: rotate(degr)
+  transform: rotate(degr)
+
 rotatable(time=0.2s) {
   -webkit-transition-duration time
   -moz-transition-duration time
@@ -64,6 +78,13 @@ doRotate(degr=15deg) {
   -moz-transform rotate(degr)
   -o-transform rotate(degr)
   -ms-transform rotate(degr);
+}
+
+doTransform() {
+  -webkit-transform arguments
+  -moz-transform arguments
+  -o-transform arguments
+  -ms-transform arguments
 }
 
 doGradient(opacity) {
@@ -150,7 +171,20 @@ span.label
     border-radius 5px
     rotatable()
     &:hover
-      doRotate()
+      /*doRotate()*/
+      animate: shake 1s ease-in 0
+
+
+@keyframes shake
+  0%, 90%
+    doTransform: translateX(0)
+    doTransform(rotate(0deg))
+  10%, 30%, 50%, 70%
+    doTransform(rotate(-15deg))
+  20%, 40%, 60%
+    doTransform(rotate(15deg))
+
+
 
 .brand
  font-family: 'Idolwild Regular', Helvetica, Arial, sans-serif;
@@ -185,6 +219,15 @@ span.label
   top -15px
   //margin-right 40px
   z-index: 100;
+
+#mascott, #mascott2 {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 @css {
   @media (max-width: 650px) {
@@ -227,3 +270,76 @@ span.label
 .highlight-message
     background-color #08C
     color white
+
+#mascott2 .leftEye {
+  width: 14px;
+  height: 3px;
+  background-color: #fff;
+  position: absolute;
+  top: 32px;
+  left: 40px;
+  rotation(-46deg)
+
+  border-bottom: 1px solid #000;
+  animate: mascott2LEye 8s ease 4s infinite;
+}
+
+@keyframes mascott2LEye
+  0%
+    height 3px
+    top: 32px
+    left: 40px
+    width: 14px
+    rotation(-46deg)
+
+  2%
+    height 9px
+    top: 33px
+    left: 43px
+    width: 12px
+    rotation(-36deg)
+
+  4%
+    height 3px
+    top: 32px
+    left: 40px
+    width: 14px
+    rotation(-46deg)
+
+
+
+#mascott2 .rightEye {
+  height: 3px;
+  top: 26px;
+  left: 64px;
+  width: 10px;
+  background-color: #fff;
+  position: absolute;
+  rotation(7deg)
+  border-bottom: 1px solid #000;
+  animate: mascott2REye 8s ease 4s infinite;
+
+}
+
+@keyframes mascott2REye
+  0%
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    rotation(7deg)
+
+  2%
+    height: 10px;
+    top: 26px;
+    left: 67px;
+    width: 10px;
+    rotation(-15deg)
+
+  4%
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    rotation(7deg)
+
