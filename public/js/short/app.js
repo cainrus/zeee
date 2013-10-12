@@ -1,4 +1,4 @@
-/* global Backbone, Handlebars */
+/* global dispatcher, window, _, $, jQuery, Backbone, Handlebars */
 (function () {
     'use strict';
 
@@ -86,8 +86,12 @@
         create: _.debounce(function () {
 
             var inputUrl = this.input.val().trim();
+            window._trackEvent && _trackEvent('process url', 'begin', inputUrl);
+
             if (this.lastUrl === inputUrl) {
                 this.options.dispatcher.trigger('eventPanel.add', 'try to add another url', 'error', {data: {id: 'try-another-url'}});
+                window._trackEvent && _trackEvent('process url', 'client error', 'inputUrl');
+
                 return;
             } else if (inputUrl) {
                 this.lastUrl = this.input.val();
@@ -121,6 +125,9 @@
                 });
 
             dispatcher.trigger('updateLastUrls', model);
+
+            window._trackEvent && _trackEvent('process url', 'success', model.orig);
+
         },
 
         clientError: function (model, message) {
@@ -129,6 +136,8 @@
             }
             message = message || 'Unknown error';
             this.options.dispatcher.trigger('eventPanel.add', message, 'error', {data: {id: escape(message).replace(/\W+/g, '-')}});
+            window._trackEvent && _trackEvent('process url', 'error:' + message, model.orig);
+
         }
 
 
@@ -286,7 +295,7 @@
             urls: $('.user-urls'),
             other: $('.messages'),
             mobile: $('.mobile-common-msgs')
-        }
+        };
 
         var timePartial = function (d) {
             if (!d) {
@@ -483,7 +492,6 @@
                     data = Number(data);
                     data = parseInt(data, 2);
                     $.cookie('flags', data);
-                    console.log('set,', key, orig);
                     return orig;
                 }
             };
@@ -491,21 +499,20 @@
             return handler;
         }());
 
-        var isReturnedUser = cookieFlags.get('returnedUser');
+        var isReturnedUser = window.cookieFlags.get('returnedUser');
         if (!isReturnedUser) {
-            cookieFlags.set('returnedUser', 1);
-            cookieFlags.set('mascott3hidden', 1);
+            window.cookieFlags.set('returnedUser', 1);
+            window.cookieFlags.set('mascott3hidden', 1);
         }
 
         var mascott3 = $('#mascott3');
         mascott3.click(function(){
             mascott3.toggleClass('hiddenMascott');
             var isHidden = mascott3.hasClass('hiddenMascott');
-            console.log(isHidden);
-            cookieFlags.set('mascott3hidden', isHidden ? 1 : 0 );
+            window.cookieFlags.set('mascott3hidden', isHidden ? 1 : 0 );
 
         });
-        var isMascott3IsHidden = cookieFlags.get('mascott3hidden');
+        var isMascott3IsHidden = window.cookieFlags.get('mascott3hidden');
         if (isMascott3IsHidden) {
             mascott3.addClass('hiddenMascott');
         }
