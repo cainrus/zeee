@@ -17,8 +17,7 @@ module.exports = function(app, conf) {
             png: 1,
             jpg: 1,
             swf: 1
-        }
-        ;
+        };
 
     var walk = function(dir) {
         var results = [];

@@ -86,11 +86,13 @@
         create: _.debounce(function () {
 
             var inputUrl = this.input.val().trim();
-            window._trackEvent && _trackEvent('process url', 'begin', inputUrl);
+            _gaq.push(['_trackEvent', 'process url', 'begin', inputUrl]);
+
+
 
             if (this.lastUrl === inputUrl) {
                 this.options.dispatcher.trigger('eventPanel.add', 'try to add another url', 'error', {data: {id: 'try-another-url'}});
-                window._trackEvent && _trackEvent('process url', 'client error', 'inputUrl');
+                _gaq.push(['_trackEvent', 'process url', 'client error', inputUrl]);
 
                 return;
             } else if (inputUrl) {
@@ -125,8 +127,7 @@
                 });
 
             dispatcher.trigger('updateLastUrls', model);
-
-            window._trackEvent && _trackEvent('process url', 'success', model.orig);
+            _gaq.push(['_trackEvent', 'process url', 'success', model.orig]);
 
         },
 
@@ -136,8 +137,7 @@
             }
             message = message || 'Unknown error';
             this.options.dispatcher.trigger('eventPanel.add', message, 'error', {data: {id: escape(message).replace(/\W+/g, '-')}});
-            window._trackEvent && _trackEvent('process url', 'error:' + message, model.orig);
-
+            _gaq.push(['_trackEvent', 'process url', 'error:' + message, model.orig]);
         }
 
 

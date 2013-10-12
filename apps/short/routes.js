@@ -106,6 +106,10 @@ module.exports = function(app, conf) {
         }
     });
 
+    // google webmaster.
+    app.get('/google21e5eb1baababd2d.html', function(req, res) {
+       res.send('google-site-verification: google21e5eb1baababd2d.html');
+    });
 };
 
 
