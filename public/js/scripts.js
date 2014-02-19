@@ -1276,7 +1276,7 @@ e.data=JSON.stringify(b.toJSON());g.emulateJSON&&(e.contentType="application/x-w
 b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){a.apply(this,arguments)};f.extend(d,a);x.prototype=a.prototype;d.prototype=new x;b&&f.extend(d.prototype,b);c&&f.extend(d,c);d.prototype.constructor=d;d.__super__=a.prototype;return d},n=function(a,b){return!a||!a[b]?null:f.isFunction(a[b])?a[b]():a[b]},t=function(){throw Error('A "url" property or function must be specified');}}).call(this);
 
 // /Users/cainrus/WebstormProjects/zeee/public/js/short/app.js
-/* global Backbone, Handlebars */
+/* global dispatcher, window, _, $, jQuery, Backbone, Handlebars */
 (function () {
     'use strict';
 
@@ -1364,8 +1364,14 @@ b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){a.apply
         create: _.debounce(function () {
 
             var inputUrl = this.input.val().trim();
+            _gaq.push(['_trackEvent', 'process url', 'begin', inputUrl]);
+
+
+
             if (this.lastUrl === inputUrl) {
                 this.options.dispatcher.trigger('eventPanel.add', 'try to add another url', 'error', {data: {id: 'try-another-url'}});
+                _gaq.push(['_trackEvent', 'process url', 'client error', inputUrl]);
+
                 return;
             } else if (inputUrl) {
                 this.lastUrl = this.input.val();
@@ -1399,6 +1405,8 @@ b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){a.apply
                 });
 
             dispatcher.trigger('updateLastUrls', model);
+            _gaq.push(['_trackEvent', 'process url', 'success', model.orig]);
+
         },
 
         clientError: function (model, message) {
@@ -1407,6 +1415,7 @@ b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){a.apply
             }
             message = message || 'Unknown error';
             this.options.dispatcher.trigger('eventPanel.add', message, 'error', {data: {id: escape(message).replace(/\W+/g, '-')}});
+            _gaq.push(['_trackEvent', 'process url', 'error:' + message, model.orig]);
         }
 
 
@@ -1564,7 +1573,7 @@ b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){a.apply
             urls: $('.user-urls'),
             other: $('.messages'),
             mobile: $('.mobile-common-msgs')
-        }
+        };
 
         var timePartial = function (d) {
             if (!d) {
@@ -1761,7 +1770,6 @@ b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){a.apply
                     data = Number(data);
                     data = parseInt(data, 2);
                     $.cookie('flags', data);
-                    console.log('set,', key, orig);
                     return orig;
                 }
             };
@@ -1769,21 +1777,20 @@ b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){a.apply
             return handler;
         }());
 
-        var isReturnedUser = cookieFlags.get('returnedUser');
+        var isReturnedUser = window.cookieFlags.get('returnedUser');
         if (!isReturnedUser) {
-            cookieFlags.set('returnedUser', 1);
-            cookieFlags.set('mascott3hidden', 1);
+            window.cookieFlags.set('returnedUser', 1);
+            window.cookieFlags.set('mascott3hidden', 1);
         }
 
         var mascott3 = $('#mascott3');
         mascott3.click(function(){
             mascott3.toggleClass('hiddenMascott');
             var isHidden = mascott3.hasClass('hiddenMascott');
-            console.log(isHidden);
-            cookieFlags.set('mascott3hidden', isHidden ? 1 : 0 );
+            window.cookieFlags.set('mascott3hidden', isHidden ? 1 : 0 );
 
         });
-        var isMascott3IsHidden = cookieFlags.get('mascott3hidden');
+        var isMascott3IsHidden = window.cookieFlags.get('mascott3hidden');
         if (isMascott3IsHidden) {
             mascott3.addClass('hiddenMascott');
         }

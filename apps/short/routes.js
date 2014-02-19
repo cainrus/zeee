@@ -41,7 +41,8 @@ module.exports = function(app, conf) {
                     db.HINCRBY('url:'+subdomain, 'count', 1);
                     ga.trackEvent({
                         category: 'Jump',
-                        action: url
+                        action: url,
+                        label: subdomain
                     });
                  } else {
                     next();

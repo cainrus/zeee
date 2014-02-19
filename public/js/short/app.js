@@ -86,13 +86,13 @@
         create: _.debounce(function () {
 
             var inputUrl = this.input.val().trim();
-            _gaq.push(['_trackEvent', 'process url', 'begin', inputUrl]);
+            window._gaq && _gaq.push(['_trackEvent', 'process url', 'begin', inputUrl]);
 
 
 
             if (this.lastUrl === inputUrl) {
                 this.options.dispatcher.trigger('eventPanel.add', 'try to add another url', 'error', {data: {id: 'try-another-url'}});
-                _gaq.push(['_trackEvent', 'process url', 'client error', inputUrl]);
+                window._gaq && _gaq.push(['_trackEvent', 'process url', 'client error', inputUrl]);
 
                 return;
             } else if (inputUrl) {
@@ -127,7 +127,7 @@
                 });
 
             dispatcher.trigger('updateLastUrls', model);
-            _gaq.push(['_trackEvent', 'process url', 'success', model.orig]);
+            window._gaq && _gaq.push(['_trackEvent', 'process url', 'success', model.orig]);
 
         },
 
@@ -137,7 +137,7 @@
             }
             message = message || 'Unknown error';
             this.options.dispatcher.trigger('eventPanel.add', message, 'error', {data: {id: escape(message).replace(/\W+/g, '-')}});
-            _gaq.push(['_trackEvent', 'process url', 'error:' + message, model.orig]);
+            window._gaq && _gaq.push(['_trackEvent', 'process url', 'error:' + message, model.orig]);
         }
 
 
@@ -439,12 +439,14 @@
 
 
         if (window.chrome && !chrome.app.isInstalled) {
-            $('head').append('<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ecchcfjajmkifnnfibbpclaiigfaanpo">');
+
             dispatcher.trigger('eventPanel.add', 'Simply click the icon to install extension: <span id="installChromeExt" style="cursor:pointer;position: absolute;" class="chrome-ext-icon"></span>', 'success', {data:{classes: 'pinned alert alert-success chrome-extension'}, status:'success', title: 'Google Chrome Extension availible.'});
             $('.chrome-extension #installChromeExt').on('click', function() {
                 chrome.webstore.install(
-                   'https://chrome.google.com/webstore/detail/ecchcfjajmkifnnfibbpclaiigfaanpo',
-                    function() {},
+                    $('link[rel="chrome-webstore-item"]').attr('href'),
+                    function() {
+                        $('.message.chrome-extension').animate({opacity:0, height: 0});
+                    },
                     function() {
                         window.open('https://chrome.google.com/webstore/detail/ecchcfjajmkifnnfibbpclaiigfaanpo', '_tab');
                     }
