@@ -1,7 +1,10 @@
 !!! 5
 html
   head
-    //- Styles
+    //- Meta
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+      //- Styles
     include styles.jade
     //- Le HTML5 shim, for IE6-8 support of HTML5 elements
     //if lt IE 9
@@ -12,9 +15,6 @@ html
     script(src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js")
     include scripts.jade
     include client.handlebars
-    //- Meta
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
     base(target="_blank")
     title= title
     include ../google/analytics/script.html
