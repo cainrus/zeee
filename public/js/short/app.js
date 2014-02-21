@@ -441,14 +441,18 @@
         if (window.chrome && !chrome.app.isInstalled) {
 
             dispatcher.trigger('eventPanel.add', 'Simply click the icon to install extension: <span id="installChromeExt" style="cursor:pointer;position: absolute;" class="chrome-ext-icon"></span>', 'success', {data:{classes: 'pinned alert alert-success chrome-extension'}, status:'success', title: 'Google Chrome Extension availible.'});
-            $('.chrome-extension #installChromeExt').on('click', function() {
+            $('.chrome-extension .chrome-ext-icon').on('click', function() {
+                var extensionUrl = $('link[rel="chrome-webstore-item"]').attr('href');
                 chrome.webstore.install(
-                    $('link[rel="chrome-webstore-item"]').attr('href'),
+                    extensionUrl,
                     function() {
+                        window._gaq && _gaq.push(['_trackEvent', 'extension', 'success']);
                         $('.message.chrome-extension').animate({opacity:0, height: 0});
                     },
                     function() {
-                        window.open('https://chrome.google.com/webstore/detail/ecchcfjajmkifnnfibbpclaiigfaanpo', '_tab');
+                        window._gaq && _gaq.push(['_trackEvent', 'extension', 'failed']);
+                        window.open(extensionUrl, '_tab') ||
+                        (window.location.href = extensionUrl);
                     }
                );
             });
@@ -458,7 +462,7 @@
             var data, dict = ['returnedUser', 'mascott3hidden'];
             var handler = {
                 get: function (key) {
-                    if (typeof key == 'undefined') {
+                    if (typeof key === 'undefined') {
                         data = Number($.cookie('flags'));
                         return (Number(!!data) ? data : 0).toString(2).split('').reverse().join('');
                     } else {
