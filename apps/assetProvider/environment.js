@@ -16,7 +16,8 @@ module.exports = function(app, conf) {
             ttf: 1,
             png: 1,
             jpg: 1,
-            swf: 1
+            swf: 1,
+            ico: 1
         };
 
     var walk = function(dir) {
