@@ -18,9 +18,8 @@
     url = new String(url);
     var regexp = new RegExp('^(http|https|ftp)://');
     if (!url.match(regexp)) url = 'http://' + url;
-    url = url.toLowerCase();
     return url;
-  }
+  };
 
   var getHostParts = function(url) {
       var result = {host:'',subdomain:'',domain:'',topdomain:''}, hostParts = [], host, countOfHostParts;
