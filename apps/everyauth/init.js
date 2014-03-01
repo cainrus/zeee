@@ -47,7 +47,6 @@ var userFactory = require(process.cwd() + '/classes/user.js');
 
 require('everyauth').everymodule
   .findUserById( function (id, callback) {
-    console.log('find user', usersCommon[id]);
     callback(null, usersCommon[id]);
   });
 
@@ -60,12 +59,8 @@ require('everyauth').facebook
     var promise = this.Promise();
     var token = 'facebook' + fbUserMetadata.id;
     userFactory.getUser(token, function(err, user) {
-           console.log('error', err);
-           console.log('try to authenticate with facebook', user);
            // user exists
            if (user && user.isUserObj) {
-               console.log('====user====');
-               console.log(user);
                user.set('name', fbUserMetadata.first_name);
                usersCommon[token] = user;
                promise.fulfill(user);
@@ -90,7 +85,6 @@ require('everyauth').facebook
   .redirectPath( '/' );
 /*
         .handleAuthCallbackError( function (req, res) {
-            console.log('facebook denied login request');
             // If a user denies your app, Facebook will redirect the user to
             // /auth/facebook/callba>ck?error_reason=user_denied&error=access_denied&error_description=The+user+denied+your+request.
             // This configurable route handler defines how you want to respond to
@@ -121,7 +115,6 @@ everyauth.password
     var promise = this.Promise();
     var token = 'password' + login + password;
     userFactory.getUser(token, function(err, user) {
-       console.log('authenticate', user);
        if (user) {
            usersCommon[token] = user;
            promise.fulfill(user);
@@ -153,10 +146,8 @@ everyauth.password
     if (errors.length) {
         return errors;
     } else {
-        console.log('async registration validation');
         var token = 'password' + newUserAttrs.login + newUserAttrs.password;
         userFactory.checkUser(token, function(err, status) {
-           console.log('status', status);
            if (status == 0)
                promise.fulfill([]);
            else
@@ -166,7 +157,6 @@ everyauth.password
     }
   })
   .registerUser( function (newUserAttrs) {
-    console.log('registerUser', newUserAttrs);
     var promise = this.Promise();
     var token = 'password' + newUserAttrs.login + newUserAttrs.password;
     usersCommon[token] = {};

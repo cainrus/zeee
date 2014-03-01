@@ -46,7 +46,6 @@ module.exports = function(app, conf) {
         app.use(function(req, res, next) {
             res.header('app' , 'short' );
             next();
-
         });
 
         app.use(express.logger());

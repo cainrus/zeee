@@ -15,4 +15,5 @@
     conf.publicDir = path.join(conf.rootDir, 'public');
     conf.registeredSubdomain = [];
     module.exports = conf;
+
 }());

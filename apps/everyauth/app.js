@@ -131,7 +131,6 @@ module.exports = (function() {
       });
     /*
             .handleAuthCallbackError( function (req, res) {
-                console.log('facebook denied login request');
                 // If a user denies your app, Facebook will redirect the user to
                 // /auth/facebook/callback?error_reason=user_denied&error=access_denied&error_description=The+user+denied+your+request.
                 // This configurable route handler defines how you want to respond to
