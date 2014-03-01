@@ -85,7 +85,7 @@ module.exports = function(app, conf) {
         var updateDataInterval,
             ipData = {}, // хэш со счетчиком на каждый ip
             throttleLimit = 10, // макс кол-во сохраненных попыток.
-            attemptLiveTime = 10*1000, // время жизни попытки
+            attemptLiveTime = 60*1000, // время жизни попытки
             daemonTimer = 3000,
             console = {log:function(){}}, // debug
             updateData = function() {
