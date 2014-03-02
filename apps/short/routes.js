@@ -10,7 +10,7 @@ module.exports = function(app, conf) {
         // url counter.
         urlCounter = require(rootPath + '/classes/counter.js')('url', db),
         ga = require(rootPath + '/google/analytics/server.ga.js'),
-        ipThrottler = require(rootPath + '/libs/throttler.js')
+        ipThrottler = require(rootPath + '/lib/throttler.js')
     ;
 
     /**
