@@ -108,9 +108,10 @@ module.exports = function(app, conf) {
     // Create new short url API
     app.post('/create', function(req, res) {
 
-        if (ipThrottler.checkIpThrottled((req.headers['x-forwarded-for'] || req.connection.remoteAddress).split(',')[0])) {
-            console.log(orig + ' was throttled');
-            res.send('{"error":"You try too hard. Chill.."}');
+        var throttleTimeLeft = ipThrottler.checkIpThrottled((req.headers['x-forwarded-for'] || req.connection.remoteAddress).split(',')[0]);
+        if (throttleTimeLeft) {
+            console.log(req.body.orig + ' was throttled');
+            res.send('{"error":"You try too hard. Chill.. '+throttleTimeLeft+'s left."}');
             return;
         }
 
