@@ -2,10 +2,11 @@ form#url-add-form.well.form-inline.form-horizontal.input-append
  #user-input
   #user-input-inner
    input#url-add-input.url-add-input(type="text", placeholder="Type url…", autofocus, autocomplete="off", title="press CTRL+C to copy")
+   noscript
+     input(type="text", placeholder="You need to enable javascript to use service…", disabled)
   button#url-add-button.btn.btn-primary.url-add-input-button
     i.icon-plus-sign.icon-white &nbsp;
   noscript
-    input(type="text", placeholder="Enable javascript first…", disabled)
     button#url-add-button.btn.btn-primary.disabled
       i.icon-plus-sign.icon-white &nbsp;
     style(type='text/css')
