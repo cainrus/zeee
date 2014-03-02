@@ -81,19 +81,47 @@ module.exports = function(app, conf) {
         res.render('short/index.jade', {appname:'short', title: 'Url shortener service'});
     });
 
+    var blacklist = [
+        'odkl2.com'
+        ],
+
+        /**
+         * Проверка сслыки на черный список.
+         * @param {string} url
+         * @returns {boolean} есть совпадение с доменом из списка запрета.
+         *
+         */
+        checkBlacklist = function(url) {
+            if (url) {
+                url = url.toLowerCase();
+                var i= 0, blackListLen = blacklist.length;
+                for (;i<blackListLen;i++) {
+                    if (url.indexOf(blacklist[i]) !== -1) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        };
+
     // Create new short url API
     app.post('/create', function(req, res) {
 
         if (ipThrottler.checkIpThrottled(req.headers['x-forwarded-for'] || req.connection.remoteAddress)) {
             res.send('{"error":"You try too hard. Chill.."}');
-
+            return;
         }
 
-
+        var orig = common.normalizeUrl(req.body.orig);
+        if (checkBlacklist(orig)) {
+            res.send('{"error":"You try too hard. Chill.."}');
+            return;
+        }
 
         var count = urlCounter.generate();
         var shrt = count.toString(16);
-        var orig = common.normalizeUrl(req.body.orig);
+
         if (orig && common.isValidUrl(orig) && !common.isSameDomain(orig, conf.domain)) {
             db.hmset('url:'+shrt, {url:  orig, count: 0, short: shrt, created: new Date().getTime()}, function(err, value) {
 
@@ -101,7 +129,7 @@ module.exports = function(app, conf) {
                 req.session.urls.unshift(shrt);
                 req.session.urls = req.session.urls.slice(0, 5);
                 if (err) {
-                    res.send(JSON.stringify({error: 'Short url hasn\'t been created. Please, try again later.'}))
+                    res.send(JSON.stringify({error: 'Short url hasn\'t been created. Please, try again later.'}));
                 } else {
                     res.send(JSON.stringify({shrt: shrt, orig: orig, status: 'updated'}));
                 }
