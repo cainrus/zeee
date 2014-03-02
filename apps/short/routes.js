@@ -108,13 +108,15 @@ module.exports = function(app, conf) {
     // Create new short url API
     app.post('/create', function(req, res) {
 
-        if (ipThrottler.checkIpThrottled(req.headers['x-forwarded-for'] || req.connection.remoteAddress)) {
+        if (ipThrottler.checkIpThrottled((req.headers['x-forwarded-for'] || req.connection.remoteAddress).split(',')[0])) {
+            console.log(orig + ' was throttled');
             res.send('{"error":"You try too hard. Chill.."}');
             return;
         }
 
         var orig = common.normalizeUrl(req.body.orig);
         if (checkBlacklist(orig)) {
+            console.log(orig + ' was blocked');
             res.send('{"error":"Sorry, domain was blocked due massive spam."}');
             return;
         }
