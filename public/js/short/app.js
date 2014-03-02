@@ -99,14 +99,17 @@
                 this.lastUrl = this.input.val();
             }
 
-            var model = new this.model();
+            var model = new this.model(),
+                self = this;
             model.save(
                 {
                     'orig': this.input.val()
                 },
-
                 {
-                    error: this.clientError,
+                    error: function() {
+                        self.lastUrl = null;
+                        self.clientError.apply(self, arguments);
+                    },
                     success: this.clientUpdate
                 }, 300, true);
         }, 300, true),
