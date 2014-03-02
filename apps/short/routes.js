@@ -115,7 +115,7 @@ module.exports = function(app, conf) {
 
         var orig = common.normalizeUrl(req.body.orig);
         if (checkBlacklist(orig)) {
-            res.send('{"error":"You try too hard. Chill.."}');
+            res.send('{"error":"Sorry, domain was blocked due massive spam."}');
             return;
         }
 
