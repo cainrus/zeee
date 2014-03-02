@@ -135,6 +135,7 @@ module.exports = function(app, conf) {
                     res.send(JSON.stringify({error: 'Short url hasn\'t been created. Please, try again later.'}));
                 } else {
                     res.send(JSON.stringify({shrt: shrt, orig: orig, status: 'updated'}));
+                    console.log(orig + ' saved as ' + shrt);
                 }
              });
         } else {
