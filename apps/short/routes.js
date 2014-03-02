@@ -9,7 +9,8 @@ module.exports = function(app, conf) {
         db  = require(rootPath + "/db/redisConnection.js")(conf),
         // url counter.
         urlCounter = require(rootPath + '/classes/counter.js')('url', db),
-        ga = require(rootPath + '/google/analytics/server.ga.js')
+        ga = require(rootPath + '/google/analytics/server.ga.js'),
+        ipThrottler = require(rootPath + '/libs/throttler.js')
     ;
 
     /**
@@ -79,108 +80,6 @@ module.exports = function(app, conf) {
     app.get('/', function(req, res) {
         res.render('short/index.jade', {appname:'short', title: 'Url shortener service'});
     });
-
-    var ipThrottler = (function() {
-
-        var updateDataInterval,
-            ipData = {}, // хэш со счетчиком на каждый ip
-            throttleLimit = 10, // макс кол-во сохраненных попыток.
-            attemptLiveTime = 60*1000, // время жизни попытки
-            daemonTimer = 3000,
-            console = {log:function(){}}, // debug
-            updateData = function() {
-                var dates, curDate = new Date()-0;
-
-                for (var ip in ipData) {
-                    if (ipData.hasOwnProperty(ip)) {
-                        dates = ipData[ip];
-                        console.log('check ip:' + ip);
-                        if (!dates.length) {
-                            console.log('no attempts, clear ip: '+ip);
-                            delete ipData[ip];
-                        } else {
-                            // чистим старые попытки для ip.
-                            for (var i=0; i<dates.length; i++) {
-                                var timeDiff = curDate - dates[0];
-
-                                if (timeDiff > attemptLiveTime) {
-                                    dates.shift();
-                                    console.log('delete attempt for ip '+ip+', current:'+dates.length);
-
-                                } else {
-                                    console.log('timeleft: ' + ((attemptLiveTime-timeDiff)/1000) + 's')
-                                }
-
-                                // удаляем ip, если больше нет попыток.
-                                if (!dates.length) {
-                                    console.log('no attempts, clear ip: '+ip);
-                                    delete ipData[ip];
-                                }
-                                break;
-
-                            }
-                        }
-                    }
-                }
-                var count = 0;
-                for (var key in ipData) {
-                    if (ipData.hasOwnProperty(key)) {
-                        count++;
-                    }
-                }
-                if (!count) {
-                    downDataUpdate();
-                }
-
-
-            },
-
-            getAttemptsDates = function(ip) {
-                ipData[ip] = ipData[ip] || [];
-                return ipData[ip];
-            },
-            addAttempt = function(ip) {
-                var dates = getAttemptsDates(ip);
-                dates.push(new Date()-0);
-                ipData[ip] = dates;
-            },
-            attemptsCount = function(ip) {
-                return ipData[ip] ? ipData[ip].length : 0;
-            },
-
-            setupDataUpdate = function() {
-                console.log('check setup dataUpdate');
-                if (!updateDataInterval) {
-                    console.log('dataUpdate daemon inited');
-                    updateDataInterval = setInterval(function() {
-                        updateData();
-                    }, daemonTimer);
-                }
-            },
-            downDataUpdate = function() {
-                console.log('kill dataUpdate daemon');
-                clearInterval(updateDataInterval);
-                updateDataInterval = null;
-            };
-
-
-
-        return {
-            checkIpThrottled: function(ip) {
-                // is limit is exceeded?
-                var attempts_count = attemptsCount(ip);
-                console.log('current attempts count for ip:' + ip +', is ' + attempts_count);
-                var exceeded = attempts_count > throttleLimit;
-                console.log('exceeded? ' +(exceeded?'yes':'no'));
-                // log attempt.
-                addAttempt(ip);
-
-                setupDataUpdate();
-
-                return exceeded;
-            }
-        };
-    }());
 
     // Create new short url API
     app.post('/create', function(req, res) {
