@@ -35,9 +35,10 @@ module.exports = function(app, conf) {
             db.hget(urlKey, 'url', function(err, url) {
                 url = url&&url.toString();
                 if (url) {
+                    res.setHeader({'Connection': 'close'});
                     res.writeHead(302, {
                         'Location': url,
-                        'Connection': "close"
+                        'Connection': 'close'
                     });
                     res.end();
 
