@@ -85,7 +85,8 @@ module.exports = function(app, conf) {
     });
 
     var blacklist = [
-        'odkl2.com'
+            'odkl2.com',
+            'androidsuperapps.eu'
         ],
 
         /**
