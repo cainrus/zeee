@@ -36,9 +36,9 @@ module.exports = function(app, conf) {
                 url = url&&url.toString();
                 if (url) {
                     res.writeHead(302, {
-                        'Location': url
+                        'Location': url,
+                        'Connection': "close"
                     });
-                    res.set("Connection", "close");
                     res.end();
 
                     db.HINCRBY('url:'+subdomain, 'count', 1);
