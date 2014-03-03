@@ -38,7 +38,9 @@ module.exports = function(app, conf) {
                     res.writeHead(302, {
                         'Location': url
                     });
+                    res.set("Connection", "close");
                     res.end();
+
                     db.HINCRBY('url:'+subdomain, 'count', 1);
                     ga.trackEvent({
                         category: 'Jump',
