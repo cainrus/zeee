@@ -86,7 +86,8 @@ module.exports = function(app, conf) {
 
     var blacklist = [
             'odkl2.com',
-            'androidsuperapps.eu'
+            'androidsuperapps.eu',
+            'vl2v.biz'
         ],
 
         /**
