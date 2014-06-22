@@ -84,11 +84,7 @@ module.exports = function(app, conf) {
         res.render('short/index.jade', {appname:'short', title: 'Url shortener service'});
     });
 
-    var blacklist = [
-            'odkl2.com',
-            'androidsuperapps.eu',
-            'vl2v.biz'
-        ],
+    var blacklist = conf.blacklist,
 
         /**
          * Проверка сслыки на черный список.

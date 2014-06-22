@@ -3,4 +3,5 @@ module.exports = function(shortyApp) {
     //var shortyApp = express.createServer();
     require('./environment.js')(shortyApp, express);
     require('./routes.js')(shortyApp);
+
 };

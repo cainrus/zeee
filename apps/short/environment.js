@@ -11,6 +11,12 @@ module.exports = function(app, conf) {
 
     app.configure('all', function() {
 
+        conf.blacklist = [
+            'odkl2.com',
+            'androidsuperapps.eu',
+            'vl2v.biz'
+        ];
+
         app.set('domain', conf.domainWithPort);
 
         app.use(express.cookieParser());

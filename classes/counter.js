@@ -3,10 +3,19 @@ module.exports = function(name, db) {
 
       var counter = (options&&options.count)||0;
       var name = (options&&options.name)||null;
-      if (!options.client) throw('set redis client as @client');
-      else var client = options.client;
-      if (!name) throw('set @name param');
-      else name = 'counters:'+name;
+
+      if (!options.client) {
+          throw('set redis client as @client');
+      }
+      else {
+          var client = options.client;
+      }
+      if (!name) {
+          throw('set @name param');
+      }
+      else {
+          name = 'counters:'+name;
+      }
 
       // set/refresh counter if is not set
       this.refresh = function(callback) {
@@ -30,9 +39,14 @@ module.exports = function(name, db) {
       if (!options.wait) {
         this.refresh();
       }
+
+      this.get = function() {
+          return counter;
+      };
+
     };
 
-    return new RedisCounter({name: name, client: db})
+    return new RedisCounter({name: name, client: db});
 }
 
 
