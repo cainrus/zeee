@@ -14,7 +14,8 @@ module.exports = function(app, conf) {
         conf.blacklist = [
             'odkl2.com',
             'androidsuperapps.eu',
-            'vl2v.biz'
+            'vl2v.biz',
+            'systemecloudportailorange.esy.es'
         ];
 
         app.set('domain', conf.domainWithPort);
