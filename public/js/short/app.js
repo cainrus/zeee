@@ -398,6 +398,12 @@
 
 
     $(function () {
+
+
+        if ($.browser.mobile) {
+            $('body').addClass('mobile');
+        }
+
         messageManager = new messageManagerClass();
         jQuery(document)
             .ajaxStart(function () {
@@ -441,7 +447,7 @@
         lastUrlsPanel.update();
 
 
-        if (window.chrome && !chrome.app.isInstalled) {
+        if (!$.browser.mobile && window.chrome && !chrome.app.isInstalled) {
 
             dispatcher.trigger('eventPanel.add', 'Simply click the icon to install extension: <span id="installChromeExt" style="cursor:pointer;position: absolute;" class="chrome-ext-icon"></span>', 'success', {data:{classes: 'pinned alert alert-success chrome-extension'}, status:'success', title: 'Google Chrome Extension availible.'});
             $('.chrome-extension .chrome-ext-icon').on('click', function() {

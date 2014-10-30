@@ -3,6 +3,11 @@ jQuery(function($){
     var cdnDomain = 'http://cdn.' + module.exports.getHostParts(location.href).domain + module.exports.getHostParts(location.href).topdomain+':'+location.port;
     var currentZeroButton, prevZeroButton, bufferText, clip;
 
+    // No need to do anything with mobile device.
+    if ($.browser.mobile) {
+        return;
+    }
+
     clip = new ZeroClipboard(null, {
       moviePath: cdnDomain + "/js/libs/zero.clipboard/ZeroClipboard.swf",
       trustedDomains: ['*'],
@@ -21,8 +26,6 @@ jQuery(function($){
     clip.on('load', function(client, args) {
       dispatcher.trigger('eventPanel.add', 'In order to copy shortened url to the clipboard, just click the <strong>copy</strong> button.' , 'info', {data:{title:'Tip'}});
     });
-
-
 
 
 

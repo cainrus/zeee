@@ -17,6 +17,7 @@ body
 #app
   position relative
 
+
 /* Short url form */
 #url-add-form 
   position relative
@@ -117,7 +118,7 @@ span.label
  font-family arial
 
 .message
-  height: 71px
+  min-height: 71px
   padding-right 12px
   hr.message-inner-separator
     clear: both
@@ -139,19 +140,27 @@ span.label
     float:right
     margin-top: 3px;
 
-.short-url
-  .info-inner
-    .link
-      float left
-      font-weight bold
-    .btn
-      float right
-      margin-right 5px
-      top -20px
-      position relative
-    .clicks
-      text-align: right;
-      margin-right: 73px;
+body
+  .short-url
+    .info-inner
+      .link
+        float left
+        font-weight bold
+      .btn
+        float right
+        margin-right 5px
+        top -20px
+        position relative
+
+      .clicks
+        text-align: right;
+        margin-right: 73px;
+.mobile
+  .info-inner .copy-button
+    display none
+
+
+/*mobile*/
 
 #overlay
   width: 100%;

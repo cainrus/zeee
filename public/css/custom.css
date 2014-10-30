@@ -1,41 +1,441 @@
-@font-face{font-family:'Idolwild Regular';src:url("Idolwild-webfont.eot");src:local('Idolwild Regular'),local('Idolwild'),url("Idolwild.ttf") format('truetype'),url("Idolwild.svg#font") format('svg')}
-h1{font-family:'Idolwild Regular',Helvetica,Arial,sans-serif}
-body{overflow-x:hidden;}
-body #mainContainer{margin-top:40px}
-#app{position:relative}
-#url-add-form{position:relative;}
-#url-add-form #user-input{height:28px;padding-right:40px;}
-#url-add-form #user-input #user-input-inner{height:28px;position:relative;margin-left:4px;margin-right:4px;}
-#url-add-form #user-input #user-input-inner input{width:100%;height:18px;padding-left:4px;padding-right:4px;margin:0;position:absolute;left:-4px}
-#url-add-form #url-add-button{position:absolute;right:21px;top:19px}
-.navbar .nav > li{padding:10px 10px 11px}
-.navbar .nav > li a#logout{padding:0}
-.navbar .nav > li#anonymous{padding:0;}
-.navbar .nav > li#anonymous button{margin-left:5px}
-span.label{font-family:arial}
-.message{height:71px;padding-right:12px;}
-.message hr.message-inner-separator{clear:both;margin-top:10px;margin-bottom:13px;border:0;height:1px;background-image:-webkit-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));background-image:-moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));background-image:-ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));background-image:-o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0))}
-.message .message-title{margin-bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.4}
-.message span.label{float:right;margin-top:3px}
-.short-url .info-inner .link{float:left;font-weight:bold}
-.short-url .info-inner .btn{float:right;margin-right:5px;top:-20px;position:relative}
-.short-url .info-inner .clicks{text-align:right;margin-right:73px}
-#overlay{width:100%;height:100%;background-color:#000;position:fixed;z-index:2000;top:0;left:0;opacity:.7;display:none}
-.chrome-extension .text{float:left}
-.chrome-extension .chrome-ext-icon{background:url("data:;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAIAAAACtmMCAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wHGQQULC1moZsAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACY0lEQVRIx61WTW/TQBB966ydD6choWnciEKbKlSlfPwchJDgwC+AEwfgiBAHhLgjgYSEEOLEjSP/gSJEKTSiTWhDiuQkLnbjGQ5urHjjKErC08qafZ55mp2dXVt8320AaP7+Y9vtruP4vo8JkUgkzEwml5tbKBYASABtu6MxbaxVzEzGMOSJIw8ECcSQff7Y63Udp9446NidbDYrNrd2/jrd6uoKA0Q8FDQeAkLTBIDtH7VUOiOPjhyrVOz5NIVWP28mH4CwSsX6flO6rptOppgJs4KTyZTruprv+wQQ8/AoFk6pJMWR/cHMRKQFBkdROp1nZgChPYocBDGBWTJAHFNBa74QPkMHqxhDKh0hwWBS39UPWpEKEY8i1VoyJBPTwLul5/PxZb9/O5bf+/VgcErEMijB9BscjWVmSQw/mv/OraZyPFZeLACo7d1T5JbPPFRiiSEZrDQjE41Ih8aSjGCvo56Vl1ZgbN/cj9YIAFbPPRomBxQhEfTRELZuNIIFnX9V7q+IAHyr3Q19qsuP1VhmyUTDN9iX67sBt/56KSRjLzqFZCLJHOkeAJ+v/QzWsvHmrNIZAC5UnwyTkb0ODmPU6WT66WotMC69XQ75za93Qs+La0+V2DGKCmL5OMV+yUNceVeJVby8/ixGUe0eSCJM/mkZ3BklZYj3Hz6Wy2X8JzQaDSkEen5PE9rscsEZl1LqnusZhjG7oud5uq7LZDrV7tj5fEFoM6XJRO2OnTGzUtd10zRbrZaZNQ3DEJMvn5k8z+t2urncnNR1ScS6nly00rbdPmwdTv1PsWiVjnvkE/0DKxbjyLjXv9QAAAAASUVORK5CYII=");width:27px;height:27px;margin-left:8px;margin-top:-5px;display:inline-block;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-webkit-transition-duration:.2s;-moz-transition-duration:.2s;-o-transition-duration:.2s;transition-duration:.2s;-webkit-transition-property:-webkit-transform;-moz-transition-property:-moz-transform;-o-transition-property:-o-transform;transition-property:transform;overflow:hidden;}
-.chrome-extension .chrome-ext-icon:hover{-webkit-animation:shake 1s ease-in 0;-moz-animation:shake 1s ease-in 0;-ms-animation:shake 1s ease-in 0;-o-animation:shake 1s ease-in 0;animation:shake 1s ease-in 0}
-.brand{font-family:'Idolwild Regular',Helvetica,Arial,sans-serif;}
-.brand span.part1{color:#08c}
-.brand span.part2{color:#fff}
-.brand span.part3{color:#ff1368}
-#mascott2{background-image:url("/img/mascott2.png");background-repeat:no-repeat;display:none;height:100px;width:112px;position:absolute;left:-97px;top:95px;display:block}
-#mascott{background-image:url("/img/mascott.png");background-repeat:no-repeat;display:none;height:142px;width:190px;position:absolute;right:-135px;top:-15px}
-#mascott3{cursor:pointer;position:fixed;background-image:url("/img/mascott.png");background-repeat:no-repeat;height:142px;width:190px;right:61px;bottom:-137px;-webkit-animation:mascott3show 1s ease-in 0;-moz-animation:mascott3show 1s ease-in 0;-ms-animation:mascott3show 1s ease-in 0;-o-animation:mascott3show 1s ease-in 0;animation:mascott3show 1s ease-in 0;-webkit-transform:rotate(14deg);-moz-transform:rotate(14deg);-ms-transform:rotate(14deg);-o-transform:rotate(14deg);transform:rotate(14deg);-webkit-transition:bottom .4s ease;-moz-transition:bottom .4s ease;-o-transition:bottom .4s ease;transition:bottom .4s ease;}
-#mascott3:not(.hiddenMascott):not(:hover){bottom:-69px}
-#mascott3:hover{bottom:-102px;-webkit-transform:rotate(13deg);-moz-transform:rotate(13deg);-ms-transform:rotate(13deg);-o-transform:rotate(13deg);transform:rotate(13deg)}
-#mascott3.hiddenMascott{bottom:-137px !important}
-.mascotts{z-index:100}
-#mascott,#mascott2{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:-moz-none;-ms-user-select:none;user-select:none}
+
+/* line 286 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003286}}
+
+/* line 1 : /Users/cainrus/WebstormProjects/zeee/node_modules/stylus/lib/functions/index.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/node_modules\/stylus\/lib\/functions\/index\.styl}line{font-family:\000031}}
+
+/* line 1 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\000031}}
+@font-face {
+  font-family: 'Idolwild Regular';
+  src: url("Idolwild-webfont.eot");
+  src: local('Idolwild Regular'), local('Idolwild'), url("Idolwild.ttf") format('truetype'), url("Idolwild.svg#font") format('svg');
+}
+
+/* line 9 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\000039}}
+h1 {
+  font-family: 'Idolwild Regular', Helvetica, Arial, sans-serif;
+}
+
+/* line 12 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000312}}
+body {
+  overflow-x: hidden;
+}
+
+/* line 14 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000314}}
+body #mainContainer {
+  margin-top: 40px;
+}
+
+/* line 17 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000317}}
+#app {
+  position: relative;
+}
+
+/* line 21 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000321}}
+/* Short url form */
+
+/* line 22 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000322}}
+#url-add-form {
+  position: relative;
+}
+
+/* line 24 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000324}}
+#url-add-form #user-input {
+  height: 28px;
+  padding-right: 40px;
+}
+
+/* line 27 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000327}}
+#url-add-form #user-input #user-input-inner {
+  height: 28px;
+  position: relative;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+/* line 32 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000332}}
+#url-add-form #user-input #user-input-inner input {
+  width: 100%;
+  height: 18px;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  position: absolute;
+  left: -4px;
+}
+
+/* line 40 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\0000340}}
+#url-add-form #url-add-button {
+  position: absolute;
+  right: 21px;
+  top: 19px;
+}
+
+/* line 104 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003104}}
+
+/* line 105 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003105}}
+
+/* line 106 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003106}}
+.navbar .nav > li {
+  padding: 10px 10px 11px;
+}
+
+/* line 108 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003108}}
+
+/* line 109 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003109}}
+.navbar .nav > li a#logout {
+  padding: 0;
+}
+
+/* line 111 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003111}}
+.navbar .nav > li#anonymous {
+  padding: 0;
+}
+
+/* line 114 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003114}}
+.navbar .nav > li#anonymous button {
+  margin-left: 5px;
+}
+
+/* line 117 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003117}}
+span.label {
+  font-family: arial;
+}
+
+/* line 120 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003120}}
+.message {
+  min-height: 71px;
+  padding-right: 12px;
+}
+
+/* line 123 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003123}}
+.message hr.message-inner-separator {
+  clear: both;
+  margin-top: 10px;
+  margin-bottom: 13px;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0));
+  background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0));
+  background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0));
+  background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0));
+}
+
+/* line 133 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003133}}
+.message .message-title {
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.4;
+}
+
+/* line 139 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003139}}
+.message span.label {
+  float: right;
+  margin-top: 3px;
+}
+
+/* line 143 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003143}}
+
+/* line 144 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003144}}
+
+/* line 145 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003145}}
+
+/* line 146 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003146}}
+body .short-url .info-inner .link {
+  float: left;
+  font-weight: bold;
+}
+
+/* line 149 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003149}}
+body .short-url .info-inner .btn {
+  float: right;
+  margin-right: 5px;
+  top: -20px;
+  position: relative;
+}
+
+/* line 155 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003155}}
+body .short-url .info-inner .clicks {
+  text-align: right;
+  margin-right: 73px;
+}
+
+/* line 158 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003158}}
+
+/* line 159 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003159}}
+.mobile .info-inner .copy-button {
+  display: none;
+}
+
+/* line 163 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003163}}
+/*mobile*/
+
+/* line 165 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003165}}
+#overlay {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
+  display: none;
+}
+
+/* line 176 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003176}}
+
+/* line 177 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003177}}
+.chrome-extension .text {
+  float: left;
+}
+
+/* line 179 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003179}}
+.chrome-extension .chrome-ext-icon {
+  background: url("data:;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAIAAAACtmMCAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wHGQQULC1moZsAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACY0lEQVRIx61WTW/TQBB966ydD6choWnciEKbKlSlfPwchJDgwC+AEwfgiBAHhLgjgYSEEOLEjSP/gSJEKTSiTWhDiuQkLnbjGQ5urHjjKErC08qafZ55mp2dXVt8320AaP7+Y9vtruP4vo8JkUgkzEwml5tbKBYASABtu6MxbaxVzEzGMOSJIw8ECcSQff7Y63Udp9446NidbDYrNrd2/jrd6uoKA0Q8FDQeAkLTBIDtH7VUOiOPjhyrVOz5NIVWP28mH4CwSsX6flO6rptOppgJs4KTyZTruprv+wQQ8/AoFk6pJMWR/cHMRKQFBkdROp1nZgChPYocBDGBWTJAHFNBa74QPkMHqxhDKh0hwWBS39UPWpEKEY8i1VoyJBPTwLul5/PxZb9/O5bf+/VgcErEMijB9BscjWVmSQw/mv/OraZyPFZeLACo7d1T5JbPPFRiiSEZrDQjE41Ih8aSjGCvo56Vl1ZgbN/cj9YIAFbPPRomBxQhEfTRELZuNIIFnX9V7q+IAHyr3Q19qsuP1VhmyUTDN9iX67sBt/56KSRjLzqFZCLJHOkeAJ+v/QzWsvHmrNIZAC5UnwyTkb0ODmPU6WT66WotMC69XQ75za93Qs+La0+V2DGKCmL5OMV+yUNceVeJVby8/ixGUe0eSCJM/mkZ3BklZYj3Hz6Wy2X8JzQaDSkEen5PE9rscsEZl1LqnusZhjG7oud5uq7LZDrV7tj5fEFoM6XJRO2OnTGzUtd10zRbrZaZNQ3DEJMvn5k8z+t2urncnNR1ScS6nly00rbdPmwdTv1PsWiVjnvkE/0DKxbjyLjXv9QAAAAASUVORK5CYII=");
+  width: 27px;
+  height: 27px;
+  margin-left: 8px;
+  margin-top: -5px;
+  display: inline-block;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property: -o-transform;
+  transition-property: transform;
+  overflow: hidden;
+}
+
+/* line 188 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003188}}
+.chrome-extension .chrome-ext-icon:hover {
+/*doRotate()*/
+  -webkit-animation: shake 1s ease-in 0;
+  -moz-animation: shake 1s ease-in 0;
+  -ms-animation: shake 1s ease-in 0;
+  -o-animation: shake 1s ease-in 0;
+  animation: shake 1s ease-in 0;
+}
+
+/* line 203 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003203}}
+.brand {
+  font-family: 'Idolwild Regular', Helvetica, Arial, sans-serif;
+}
+
+/* line 206 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003206}}
+.brand span.part1 {
+  color: #08c;
+}
+
+/* line 208 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003208}}
+.brand span.part2 {
+  color: #fff;
+}
+
+/* line 210 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003210}}
+.brand span.part3 {
+  color: #ff1368;
+}
+
+/* line 213 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003213}}
+#mascott2 {
+  background-image: url("/img/mascott2.png");
+  background-repeat: no-repeat;
+  display: none;
+  height: 100px;
+  width: 112px;
+  position: absolute;
+  left: -97px;
+  top: 95px;
+  display: block;
+}
+
+/* line 224 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003224}}
+#mascott {
+  background-image: url("/img/mascott.png");
+  background-repeat: no-repeat;
+  display: none;
+  height: 142px;
+  width: 190px;
+  position: absolute;
+  right: -135px;
+  top: -15px;
+}
+
+/* line 234 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003234}}
+#mascott3 {
+  cursor: pointer;
+  position: fixed;
+  background-image: url("/img/mascott.png");
+  background-repeat: no-repeat;
+  height: 142px;
+  width: 190px;
+  right: 61px;
+  bottom: -137px;
+  -webkit-animation: mascott3show 1s ease-in 0;
+  -moz-animation: mascott3show 1s ease-in 0;
+  -ms-animation: mascott3show 1s ease-in 0;
+  -o-animation: mascott3show 1s ease-in 0;
+  animation: mascott3show 1s ease-in 0;
+  -webkit-transform: rotate(14deg);
+  -moz-transform: rotate(14deg);
+  -ms-transform: rotate(14deg);
+  -o-transform: rotate(14deg);
+  transform: rotate(14deg);
+  -webkit-transition: bottom 0.4s ease;
+  -moz-transition: bottom 0.4s ease;
+  -o-transition: bottom 0.4s ease;
+  transition: bottom 0.4s ease;
+}
+
+/* line 245 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003245}}
+#mascott3:not(.hiddenMascott):not(:hover) {
+  bottom: -69px;
+}
+
+/* line 249 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003249}}
+#mascott3:hover {
+  bottom: -102px;
+  -webkit-transform: rotate(13deg);
+  -moz-transform: rotate(13deg);
+  -ms-transform: rotate(13deg);
+  -o-transform: rotate(13deg);
+  transform: rotate(13deg);
+}
+
+/* line 252 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003252}}
+#mascott3.hiddenMascott {
+  bottom: -137px !important;
+}
+
+/* line 264 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003264}}
+.mascotts {
+  z-index: 100;
+}
+
+/* line 267 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003267}}
+#mascott,
+#mascott2 {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* line 276 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003276}}
+
 @media (max-width: 650px) {
   #monster {
     display: none;
@@ -59,59 +459,704 @@ span.label{font-family:arial}
       display: none;
     }
 }
-.message{-moz-transition:background-color .2s;-webkit-transition:background-color .2s;-o-transition:background-color .2s;transition:background-color .2s;bg-moz-transition:color .2s;-webkit-transition:color .2s;-o-transition:color .2s;transition:color .2s}
-.highlight-message{background-color:#08c;color:#fff}
-#mascott2 .leftEye{width:14px;height:3px;background-color:#fff;position:absolute;top:32px;left:40px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg);border-bottom:1px solid #000;-webkit-animation:mascott2LEye 8s ease 4s infinite;-moz-animation:mascott2LEye 8s ease 4s infinite;-ms-animation:mascott2LEye 8s ease 4s infinite;-o-animation:mascott2LEye 8s ease 4s infinite;animation:mascott2LEye 8s ease 4s infinite}
-#mascott2 .rightEye{height:3px;top:26px;left:64px;width:10px;background-color:#fff;position:absolute;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg);border-bottom:1px solid #000;-webkit-animation:mascott2REye 8s ease 4s infinite;-moz-animation:mascott2REye 8s ease 4s infinite;-ms-animation:mascott2REye 8s ease 4s infinite;-o-animation:mascott2REye 8s ease 4s infinite;animation:mascott2REye 8s ease 4s infinite}
-div[style*="gofhjkjmkpinhpoiabjplobcaignabnl"]{display:none}
-@-moz-keyframes shake{0%,100%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0)}
-10%,30%,55%,85%{-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-o-transform:rotate(-15deg);-ms-transform:rotate(-15deg)}
-20%,40%,70%{-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);-o-transform:rotate(15deg);-ms-transform:rotate(15deg)}
-}@-webkit-keyframes shake{0%,100%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0)}
-10%,30%,55%,85%{-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-o-transform:rotate(-15deg);-ms-transform:rotate(-15deg)}
-20%,40%,70%{-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);-o-transform:rotate(15deg);-ms-transform:rotate(15deg)}
-}@-o-keyframes shake{0%,100%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0)}
-10%,30%,55%,85%{-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-o-transform:rotate(-15deg);-ms-transform:rotate(-15deg)}
-20%,40%,70%{-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);-o-transform:rotate(15deg);-ms-transform:rotate(15deg)}
-}@-ms-keyframes shake{0%,100%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0)}
-10%,30%,55%,85%{-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-o-transform:rotate(-15deg);-ms-transform:rotate(-15deg)}
-20%,40%,70%{-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);-o-transform:rotate(15deg);-ms-transform:rotate(15deg)}
-}@keyframes shake{0%,100%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0)}
-10%,30%,55%,85%{-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-o-transform:rotate(-15deg);-ms-transform:rotate(-15deg)}
-20%,40%,70%{-webkit-transform:rotate(15deg);-moz-transform:rotate(15deg);-o-transform:rotate(15deg);-ms-transform:rotate(15deg)}
-}@-moz-keyframes mascott3show{0%100%{bottom:-69px}
-}@-webkit-keyframes mascott3show{0%100%{bottom:-69px}
-}@-o-keyframes mascott3show{0%100%{bottom:-69px}
-}@-ms-keyframes mascott3show{0%100%{bottom:-69px}
-}@keyframes mascott3show{0%100%{bottom:-69px}
-}@-moz-keyframes mascott2LEye{0%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-2%{height:9px;top:33px;left:43px;width:12px;-webkit-transform:rotate(-36deg);-moz-transform:rotate(-36deg);-ms-transform:rotate(-36deg);-o-transform:rotate(-36deg);transform:rotate(-36deg)}
-4%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-}@-webkit-keyframes mascott2LEye{0%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-2%{height:9px;top:33px;left:43px;width:12px;-webkit-transform:rotate(-36deg);-moz-transform:rotate(-36deg);-ms-transform:rotate(-36deg);-o-transform:rotate(-36deg);transform:rotate(-36deg)}
-4%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-}@-o-keyframes mascott2LEye{0%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-2%{height:9px;top:33px;left:43px;width:12px;-webkit-transform:rotate(-36deg);-moz-transform:rotate(-36deg);-ms-transform:rotate(-36deg);-o-transform:rotate(-36deg);transform:rotate(-36deg)}
-4%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-}@-ms-keyframes mascott2LEye{0%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-2%{height:9px;top:33px;left:43px;width:12px;-webkit-transform:rotate(-36deg);-moz-transform:rotate(-36deg);-ms-transform:rotate(-36deg);-o-transform:rotate(-36deg);transform:rotate(-36deg)}
-4%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-}@keyframes mascott2LEye{0%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-2%{height:9px;top:33px;left:43px;width:12px;-webkit-transform:rotate(-36deg);-moz-transform:rotate(-36deg);-ms-transform:rotate(-36deg);-o-transform:rotate(-36deg);transform:rotate(-36deg)}
-4%{height:3px;top:32px;left:40px;width:14px;-webkit-transform:rotate(-46deg);-moz-transform:rotate(-46deg);-ms-transform:rotate(-46deg);-o-transform:rotate(-46deg);transform:rotate(-46deg)}
-}@-moz-keyframes mascott2REye{0%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-2%{height:10px;top:26px;left:67px;width:10px;-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-ms-transform:rotate(-15deg);-o-transform:rotate(-15deg);transform:rotate(-15deg)}
-4%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-}@-webkit-keyframes mascott2REye{0%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-2%{height:10px;top:26px;left:67px;width:10px;-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-ms-transform:rotate(-15deg);-o-transform:rotate(-15deg);transform:rotate(-15deg)}
-4%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-}@-o-keyframes mascott2REye{0%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-2%{height:10px;top:26px;left:67px;width:10px;-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-ms-transform:rotate(-15deg);-o-transform:rotate(-15deg);transform:rotate(-15deg)}
-4%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-}@-ms-keyframes mascott2REye{0%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-2%{height:10px;top:26px;left:67px;width:10px;-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-ms-transform:rotate(-15deg);-o-transform:rotate(-15deg);transform:rotate(-15deg)}
-4%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-}@keyframes mascott2REye{0%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
-2%{height:10px;top:26px;left:67px;width:10px;-webkit-transform:rotate(-15deg);-moz-transform:rotate(-15deg);-ms-transform:rotate(-15deg);-o-transform:rotate(-15deg);transform:rotate(-15deg)}
-4%{height:3px;top:26px;left:64px;width:10px;-webkit-transform:rotate(7deg);-moz-transform:rotate(7deg);-ms-transform:rotate(7deg);-o-transform:rotate(7deg);transform:rotate(7deg)}
+
+/* line 302 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003302}}
+.message {
+  -moz-transition: background-color 0.2s;
+  -webkit-transition: background-color 0.2s;
+  -o-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+bg
+  -moz-transition: color 0.2s;
+  -webkit-transition: color 0.2s;
+  -o-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+/* line 314 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003314}}
+.highlight-message {
+  background-color: #08c;
+  color: #fff;
+}
+
+/* line 318 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003318}}
+#mascott2 .leftEye {
+  width: 14px;
+  height: 3px;
+  background-color: #fff;
+  position: absolute;
+  top: 32px;
+  left: 40px;
+  -webkit-transform: rotate(-46deg);
+  -moz-transform: rotate(-46deg);
+  -ms-transform: rotate(-46deg);
+  -o-transform: rotate(-46deg);
+  transform: rotate(-46deg);
+  border-bottom: 1px solid #000;
+  -webkit-animation: mascott2LEye 8s ease 4s infinite;
+  -moz-animation: mascott2LEye 8s ease 4s infinite;
+  -ms-animation: mascott2LEye 8s ease 4s infinite;
+  -o-animation: mascott2LEye 8s ease 4s infinite;
+  animation: mascott2LEye 8s ease 4s infinite;
+}
+
+/* line 355 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003355}}
+#mascott2 .rightEye {
+  height: 3px;
+  top: 26px;
+  left: 64px;
+  width: 10px;
+  background-color: #fff;
+  position: absolute;
+  -webkit-transform: rotate(7deg);
+  -moz-transform: rotate(7deg);
+  -ms-transform: rotate(7deg);
+  -o-transform: rotate(7deg);
+  transform: rotate(7deg);
+  border-bottom: 1px solid #000;
+  -webkit-animation: mascott2REye 8s ease 4s infinite;
+  -moz-animation: mascott2REye 8s ease 4s infinite;
+  -ms-animation: mascott2REye 8s ease 4s infinite;
+  -o-animation: mascott2REye 8s ease 4s infinite;
+  animation: mascott2REye 8s ease 4s infinite;
+}
+
+/* line 390 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003390}}
+/* hide flash block extension */
+
+/* line 391 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003391}}
+div[style*="gofhjkjmkpinhpoiabjplobcaignabnl"] {
+  display: none;
+}
+
+/* line 193 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003193}}
+@-moz-keyframes shake {
+
+/* line 194 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003194}}
+  0%, 100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+  }
+
+/* line 196 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003196}}
+  10%, 30%, 55%, 85% {
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+  }
+
+/* line 198 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003198}}
+  20%, 40%, 70% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+  }
+}
+
+/* line 193 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003193}}
+@-webkit-keyframes shake {
+
+/* line 194 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003194}}
+  0%, 100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+  }
+
+/* line 196 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003196}}
+  10%, 30%, 55%, 85% {
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+  }
+
+/* line 198 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003198}}
+  20%, 40%, 70% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+  }
+}
+
+/* line 193 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003193}}
+@-o-keyframes shake {
+
+/* line 194 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003194}}
+  0%, 100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+  }
+
+/* line 196 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003196}}
+  10%, 30%, 55%, 85% {
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+  }
+
+/* line 198 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003198}}
+  20%, 40%, 70% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+  }
+}
+
+/* line 193 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003193}}
+@keyframes shake {
+
+/* line 194 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003194}}
+  0%, 100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+  }
+
+/* line 196 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003196}}
+  10%, 30%, 55%, 85% {
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+  }
+
+/* line 198 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003198}}
+  20%, 40%, 70% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+  }
+}
+
+/* line 257 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003257}}
+@-moz-keyframes mascott3show {
+
+/* line 258 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003258}}
+
+/* line 260 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003260}}
+  to {
+    bottom: -69px;
+  }
+}
+
+/* line 257 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003257}}
+@-webkit-keyframes mascott3show {
+
+/* line 258 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003258}}
+
+/* line 260 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003260}}
+  to {
+    bottom: -69px;
+  }
+}
+
+/* line 257 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003257}}
+@-o-keyframes mascott3show {
+
+/* line 258 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003258}}
+
+/* line 260 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003260}}
+  to {
+    bottom: -69px;
+  }
+}
+
+/* line 257 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003257}}
+@keyframes mascott3show {
+
+/* line 258 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003258}}
+
+/* line 260 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003260}}
+  to {
+    bottom: -69px;
+  }
+}
+
+/* line 331 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003331}}
+@-moz-keyframes mascott2LEye {
+
+/* line 332 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003332}}
+  0% {
+    height: 3px;
+    top: 32px;
+    left: 40px;
+    width: 14px;
+    -webkit-transform: rotate(-46deg);
+    -moz-transform: rotate(-46deg);
+    -ms-transform: rotate(-46deg);
+    -o-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+  }
+
+/* line 339 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003339}}
+  2% {
+    height: 9px;
+    top: 33px;
+    left: 43px;
+    width: 12px;
+    -webkit-transform: rotate(-36deg);
+    -moz-transform: rotate(-36deg);
+    -ms-transform: rotate(-36deg);
+    -o-transform: rotate(-36deg);
+    transform: rotate(-36deg);
+  }
+
+/* line 346 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003346}}
+  4% {
+    height: 3px;
+    top: 32px;
+    left: 40px;
+    width: 14px;
+    -webkit-transform: rotate(-46deg);
+    -moz-transform: rotate(-46deg);
+    -ms-transform: rotate(-46deg);
+    -o-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+  }
+}
+
+/* line 331 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003331}}
+@-webkit-keyframes mascott2LEye {
+
+/* line 332 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003332}}
+  0% {
+    height: 3px;
+    top: 32px;
+    left: 40px;
+    width: 14px;
+    -webkit-transform: rotate(-46deg);
+    -moz-transform: rotate(-46deg);
+    -ms-transform: rotate(-46deg);
+    -o-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+  }
+
+/* line 339 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003339}}
+  2% {
+    height: 9px;
+    top: 33px;
+    left: 43px;
+    width: 12px;
+    -webkit-transform: rotate(-36deg);
+    -moz-transform: rotate(-36deg);
+    -ms-transform: rotate(-36deg);
+    -o-transform: rotate(-36deg);
+    transform: rotate(-36deg);
+  }
+
+/* line 346 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003346}}
+  4% {
+    height: 3px;
+    top: 32px;
+    left: 40px;
+    width: 14px;
+    -webkit-transform: rotate(-46deg);
+    -moz-transform: rotate(-46deg);
+    -ms-transform: rotate(-46deg);
+    -o-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+  }
+}
+
+/* line 331 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003331}}
+@-o-keyframes mascott2LEye {
+
+/* line 332 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003332}}
+  0% {
+    height: 3px;
+    top: 32px;
+    left: 40px;
+    width: 14px;
+    -webkit-transform: rotate(-46deg);
+    -moz-transform: rotate(-46deg);
+    -ms-transform: rotate(-46deg);
+    -o-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+  }
+
+/* line 339 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003339}}
+  2% {
+    height: 9px;
+    top: 33px;
+    left: 43px;
+    width: 12px;
+    -webkit-transform: rotate(-36deg);
+    -moz-transform: rotate(-36deg);
+    -ms-transform: rotate(-36deg);
+    -o-transform: rotate(-36deg);
+    transform: rotate(-36deg);
+  }
+
+/* line 346 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003346}}
+  4% {
+    height: 3px;
+    top: 32px;
+    left: 40px;
+    width: 14px;
+    -webkit-transform: rotate(-46deg);
+    -moz-transform: rotate(-46deg);
+    -ms-transform: rotate(-46deg);
+    -o-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+  }
+}
+
+/* line 331 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003331}}
+@keyframes mascott2LEye {
+
+/* line 332 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003332}}
+  0% {
+    height: 3px;
+    top: 32px;
+    left: 40px;
+    width: 14px;
+    -webkit-transform: rotate(-46deg);
+    -moz-transform: rotate(-46deg);
+    -ms-transform: rotate(-46deg);
+    -o-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+  }
+
+/* line 339 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003339}}
+  2% {
+    height: 9px;
+    top: 33px;
+    left: 43px;
+    width: 12px;
+    -webkit-transform: rotate(-36deg);
+    -moz-transform: rotate(-36deg);
+    -ms-transform: rotate(-36deg);
+    -o-transform: rotate(-36deg);
+    transform: rotate(-36deg);
+  }
+
+/* line 346 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003346}}
+  4% {
+    height: 3px;
+    top: 32px;
+    left: 40px;
+    width: 14px;
+    -webkit-transform: rotate(-46deg);
+    -moz-transform: rotate(-46deg);
+    -ms-transform: rotate(-46deg);
+    -o-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+  }
+}
+
+/* line 368 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003368}}
+@-moz-keyframes mascott2REye {
+
+/* line 369 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003369}}
+  0% {
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+  }
+
+/* line 376 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003376}}
+  2% {
+    height: 10px;
+    top: 26px;
+    left: 67px;
+    width: 10px;
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+
+/* line 383 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003383}}
+  4% {
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+  }
+}
+
+/* line 368 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003368}}
+@-webkit-keyframes mascott2REye {
+
+/* line 369 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003369}}
+  0% {
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+  }
+
+/* line 376 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003376}}
+  2% {
+    height: 10px;
+    top: 26px;
+    left: 67px;
+    width: 10px;
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+
+/* line 383 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003383}}
+  4% {
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+  }
+}
+
+/* line 368 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003368}}
+@-o-keyframes mascott2REye {
+
+/* line 369 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003369}}
+  0% {
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+  }
+
+/* line 376 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003376}}
+  2% {
+    height: 10px;
+    top: 26px;
+    left: 67px;
+    width: 10px;
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+
+/* line 383 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003383}}
+  4% {
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+  }
+}
+
+/* line 368 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003368}}
+@keyframes mascott2REye {
+
+/* line 369 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003369}}
+  0% {
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+  }
+
+/* line 376 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003376}}
+  2% {
+    height: 10px;
+    top: 26px;
+    left: 67px;
+    width: 10px;
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+
+/* line 383 : /Users/cainrus/WebstormProjects/zeee/public/css/custom.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/Users\/cainrus\/WebstormProjects\/zeee\/public\/css\/custom\.styl}line{font-family:\00003383}}
+  4% {
+    height: 3px;
+    top: 26px;
+    left: 64px;
+    width: 10px;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+  }
 }
