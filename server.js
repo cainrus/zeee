@@ -6,9 +6,6 @@ var
 // Init database.
 require("./db/redis.init.js")(conf);
 
-//var socketio = require('./classes/socket.js')(conf);
-//global.everyauth = require('everyauth');
-
 // Initialize vhosts.
 global.server = express.createServer();
 global.server
@@ -18,7 +15,7 @@ global.server
 
 console.log('listen: cdn.' + conf.domain + ':' + conf.port);
 console.log('listen: *.' + conf.domain + ':' + conf.port);
-console.log('mode: ' + conf.env);
+console.log('env: ' + conf.env);
 global.server.listen(conf.port);
 
 
