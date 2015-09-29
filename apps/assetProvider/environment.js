@@ -6,7 +6,7 @@ module.exports = function(app, conf) {
         extend = require('xtend'),
         fs = require('fs'),
         path = require('path'),
-        allowedDomain = ['http://', conf.subdomain, '.', conf.domainWithPort].join(''),
+        allowedDomain = [conf.subdomain, '.', conf.domainWithPort].join(''),
         allowedExtensions = {
             json: 1,
             js: 1,
@@ -54,7 +54,8 @@ module.exports = function(app, conf) {
             // Restrict cross domain ajax transport.
             } else {
                 // Check CORS
-                res.header('Access-Control-Allow-Origin',  allowedDomain);
+                res.header('Access-Control-Allow-Origin',  'http://' + allowedDomain);
+                res.header('Access-Control-Allow-Origin',  'https://' + allowedDomain);
                 res.header('Access-Control-Allow-Methods', 'GET, HEAD');
                 res.header('Access-Control-Allow-Headers', 'Content-Type');
                 res.header('Access-Control-Allow-Credentials', 'false');
