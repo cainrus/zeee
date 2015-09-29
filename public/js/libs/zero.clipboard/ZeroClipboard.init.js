@@ -1,6 +1,6 @@
 jQuery(function($){
 
-    var cdnDomain = 'http://cdn.' + module.exports.getHostParts(location.href).domain + module.exports.getHostParts(location.href).topdomain+':'+location.port;
+    var cdnDomain = window.location.protocol + '//cdn.' + module.exports.getHostParts(location.href).domain + module.exports.getHostParts(location.href).topdomain+':'+location.port;
     var currentZeroButton, prevZeroButton, bufferText, clip;
 
     // No need to do anything with mobile device.
