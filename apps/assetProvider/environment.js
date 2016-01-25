@@ -54,8 +54,7 @@ module.exports = function(app, conf) {
             // Restrict cross domain ajax transport.
             } else {
                 // Check CORS
-                res.header('Access-Control-Allow-Origin',  'http://' + allowedDomain);
-                res.header('Access-Control-Allow-Origin',  'https://' + allowedDomain);
+                res.header('Access-Control-Allow-Origin',  'https://ze.ee');
                 res.header('Access-Control-Allow-Methods', 'GET, HEAD');
                 res.header('Access-Control-Allow-Headers', 'Content-Type');
                 res.header('Access-Control-Allow-Credentials', 'false');

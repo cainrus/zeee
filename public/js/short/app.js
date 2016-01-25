@@ -1,6 +1,10 @@
-/* global dispatcher, window, _, $, jQuery, Backbone, Handlebars */
+/* global dispatcher, window, _, $, jQuery, Backbone, Handlebars, location */
 (function () {
   'use strict';
+
+  if (location.protocol !== 'https:') {
+    location.href = 'https://' + location.host;
+  }
 
   var common = module.exports;
   var Url = Backbone.Model.extend({
@@ -110,7 +114,7 @@
     }, 300, true),
 
     clientUpdate: function (model, data) {
-      var shortUrl = location.host.replace('www.', model.escape('shrt') + '.');
+      var shortUrl = model.escape('shrt') + '.' + window.location.host.replace('www.', '');
 
       this.input
         .val(shortUrl)
